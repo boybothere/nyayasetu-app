@@ -22,6 +22,20 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// POST /api/ingest/webhook — simulates CCMS calling NyayaSetu
+router.post("/webhook", express.json(), async (req, res) => {
+    // CCMS would send: { case_number, court, judgment_url }
+    const { case_number, judgment_url } = req.body;
+
+    // For demo: Just acknowledge receipt
+    res.json({
+        success: true,
+        message: 'Judgment received from Government CCMS API',
+        case_number,
+        status: 'queued_for_extraction'
+    });
+});
+
 // POST /api/ingest/upload
 router.post("/upload", upload.single("judgment"), async (req, res) => {
     try {

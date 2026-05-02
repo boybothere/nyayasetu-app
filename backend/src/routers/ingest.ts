@@ -54,7 +54,7 @@ Extract the following from this judgment text and return ONLY valid JSON:
   "limitation_period_days": 90,
   "raw_summary": "2-3 sentence summary of the judgment"
 }
-Judgment text:\n\n${rawText.slice(0, -16000)}`;
+Judgment text:\n\n${rawText}`;
         // (Truncate to 30k chars to stay within token limits)
 
         // THE BULLETPROOF PARSER

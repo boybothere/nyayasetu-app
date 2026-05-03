@@ -1,0 +1,30 @@
+{
+  "agent": "Legal Analyst",
+  "timestamp": "2026-05-03T21:59:19.042Z",
+  "output": {
+    "annotated_directives": [
+      {
+        "directive_id": "D1",
+        "original_text": "In the result, the present Criminal Appeal is dismissed confirming the conviction and sentence recorded by the learned I Additional District and Sessions Judge, Chittoor in Sessions Case No.15 of 2014, dated 26.07.2018.",
+        "source_quote": "In the result, the present Criminal Appeal is dismissed confirming the conviction and sentence recorded by the learned I Additional District and Sessions Judge, Chittoor in Sessions Case No.15 of 2014, dated 26.07.2018.",
+        "legal_significance": "This directive is the core of the judgment, signifying the final decision of the High Court on the appeal. By dismissing the criminal appeal, the High Court upholds and affirms the lower court's conviction and sentence against the appellant, thereby establishing the legal validity of the previous judgment. This means the appellant remains convicted and must serve the sentence imposed by the I Additional District and Sessions Judge, Chittoor.",
+        "ambiguity_flag": false,
+        "confidence_score": 1,
+        "plain_language": "The High Court has rejected the appeal, meaning the earlier court's decision to find the person guilty and give them a sentence is upheld and remains in effect.",
+        "hindi_summary": "उच्च न्यायालय ने आपराधिक अपील खारिज कर दी है, जिससे निचली अदालत द्वारा सुनाई गई दोषसिद्धि और सजा बरकरार रहेगी।"
+      },
+      {
+        "directive_id": "D2",
+        "original_text": "Miscellaneous petitions, if any, pending in the Criminal Appeal, shall stand closed.",
+        "source_quote": "Miscellaneous petitions, if any, pending in the Criminal Appeal, shall stand closed.",
+        "legal_significance": "This is a standard procedural directive. With the dismissal of the main criminal appeal, any ancillary applications or miscellaneous petitions filed within the context of that appeal become infructuous and are automatically closed. This ensures administrative efficiency and prevents unnecessary follow-up on matters that are no longer relevant to the primary case which has been decided.",
+        "ambiguity_flag": false,
+        "confidence_score": 1,
+        "plain_language": "Any other small requests or applications connected to this criminal appeal are now considered resolved and closed.",
+        "hindi_summary": "आपराधिक अपील से संबंधित यदि कोई अन्य याचिकाएं लंबित हैं, तो वे अब समाप्त मानी जाएंगी।"
+      }
+    ],
+    "overall_judgment_type": "appeal_candidate",
+    "analyst_notes": "The judgment dismisses the criminal appeal, thereby confirming the conviction and sentence for serious offenses including kidnapping, rape, and murder under the IPC and POCSO Act. This is a definitive outcome at the High Court level, upholding the trial court's decision. The appellant's next legal recourse would likely be an appeal to the Supreme Court of India."
+  }
+}

@@ -20,7 +20,6 @@ dist/
 /backend/dist/
 
 # Local Storage (Keep PDFs off GitHub)
-cases/
 uploads/
 /backend/cases/
 

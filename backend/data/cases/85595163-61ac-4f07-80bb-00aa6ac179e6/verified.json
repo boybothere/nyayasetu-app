@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "directive_id": "D1",
+      "decision": "approved",
+      "data": null,
+      "reviewer": "",
+      "timestamp": "2026-05-03T22:01:55.014Z"
+    },
+    {
+      "directive_id": "D2",
+      "decision": "rejected",
+      "data": null,
+      "reviewer": "",
+      "timestamp": "2026-05-03T22:01:57.753Z"
+    }
+  ],
+  "allApproved": false
+}

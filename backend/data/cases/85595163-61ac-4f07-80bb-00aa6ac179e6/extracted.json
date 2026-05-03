@@ -1,0 +1,28 @@
+{
+  "caseId": "85595163-61ac-4f07-80bb-00aa6ac179e6",
+  "uploadedAt": "2026-05-03T21:58:59.400Z",
+  "case_number": "CRIMINAL APPEAL NO: 2612/2018",
+  "date_of_order": "2026-05-01",
+  "court_name": "HIGH COURT OF ANDHRA PRADESH AT AMARAVATI",
+  "petitioner": "GILAKALAGIRI, HINDU, R/O. KUKKALAGUDA VILLAGE, YERPEDU MANDAL, CHITTOOR DISTRICT.",
+  "respondent": "THE STATE OF ANDHRA PRADESH, The Public Prosecutor, High Court of Telangana and A.P Hyderabad.",
+  "government_department_involved": null,
+  "directives": [
+    {
+      "id": "D1",
+      "text": "In the result, the present Criminal Appeal is dismissed confirming the conviction and sentence recorded by the learned I Additional District and Sessions Judge, Chittoor in Sessions Case No.15 of 2014, dated 26.07.2018.",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Miscellaneous petitions, if any, pending in the Criminal Appeal, shall stand closed.",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": null,
+  "raw_summary": "The Andhra Pradesh High Court dismissed Criminal Appeal No. 2612/2018, affirming the conviction and life sentence of the appellant, Gilakalagiri, as imposed by the I Additional District and Sessions Judge, Chittoor. The court found that the prosecution had proven beyond reasonable doubt the appellant's guilt for offenses under Sections 363, 302 IPC, and Section 6 of the POCSO Act, relating to the kidnapping, rape, and murder of a minor girl. The judgment relies on circumstantial evidence, including the 'last seen' theory and medical evidence."
+}

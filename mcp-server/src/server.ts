@@ -42,11 +42,25 @@ server.tool(
                     type: "text",
                     text: JSON.stringify([
                         {
-                            id: "test-case-123",
-                            case_number: "WP/79/2015",
+                            id: "bhc-goa-wp-1042-2025",
+                            case_number: "WP/1042/2025",
                             outcome: "allowed",
-                            outcome_reason: "Petition allowed. High Court cancelled Industrial Court decision.",
-                            respondent: "State Government"
+                            outcome_reason: "The State Government is directed to clear all pending provident fund and retirement dues for Kadamba Transport Corporation employees within 30 days.",
+                            respondent: "State of Goa & Kadamba Transport Corporation"
+                        },
+                        {
+                            id: "bhc-goa-pil-45-2024",
+                            case_number: "PIL/45/2024",
+                            outcome: "allowed",
+                            outcome_reason: "The court finds severe Coastal Regulation Zone (CRZ) violations. The Goa Coastal Zone Management Authority (GCZMA) and North Goa District Collector are ordered to demolish the illegal structures at Morjim beach and submit a compliance report within 15 days.",
+                            respondent: "GCZMA & State Government"
+                        },
+                        {
+                            id: "bhc-goa-wp-2099-2025",
+                            case_number: "WP/2099/2025",
+                            outcome: "dismissed",
+                            outcome_reason: "The petition filed by the private contractor is devoid of merit. The Public Works Department's (PWD) decision to terminate the highway tender was lawful and is upheld.",
+                            respondent: "Public Works Department, Goa"
                         }
                     ], null, 2)
                 }]

@@ -1,4 +1,5 @@
 "use client";
+import { UI_DICT, LANGUAGES } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { api } from "@/lib/api";
@@ -12,53 +13,89 @@ export default function VerifyPage() {
     const [decisions, setDecisions] = useState<Record<string, string>>({});
     const [reviewerName, setReviewerName] = useState('');
 
+    const [isLocked, setIsLocked] = useState(false);
+    const [rejectModal, setRejectModal] = useState({ show: false, directiveId: '', reason: '' });
+
+    // 2. THE LANGUAGE STATE
+    const [lang, setLang] = useState<'en' | 'hi' | 'mr'>('en');
+    const t = UI_DICT[lang]; // Pulls the correct language dynamically
+
     const searchPluginInstance = searchPlugin();
     const { highlight } = searchPluginInstance;
 
     useEffect(() => {
-        if (caseId) api.getVerification(caseId).then(setPlan);
+        if (caseId) {
+            api.getVerification(caseId).then(setPlan);
+            api.getExistingDecisions(caseId).then((verified: any) => {
+                if (verified?.items && verified.items.length > 0) {
+                    const existingDecisions: Record<string, string> = {};
+                    verified.items.forEach((item: any) => {
+                        existingDecisions[item.directive_id] = item.decision;
+                    });
+                    setDecisions(existingDecisions);
+                    setIsLocked(true);
+                }
+            }).catch(console.error);
+        }
     }, [caseId]);
 
-    const decide = async (directiveId: string, decision: string) => {
-        await api.submitVerification(caseId, { directive_id: directiveId, decision, reviewer_name: reviewerName });
+    const decide = async (directiveId: string, decision: string, reason?: string) => {
+        await api.submitVerification(caseId, {
+            directive_id: directiveId,
+            decision,
+            reviewer_name: reviewerName,
+            rejection_reason: reason || null
+        });
         setDecisions(d => ({ ...d, [directiveId]: decision }));
     };
 
-    const handleHighlight = (quote: string) => {
-        if (quote) highlight(quote);
-    };
+    const handleHighlight = (quote: string) => { if (quote) highlight(quote); };
 
-    const allDecided = plan?.output?.action_items?.every((item: any) => decisions[item.directive_id]);
+    const items = plan?.output?.action_items || [];
+    const allDecided = items.length > 0 && items.every((item: any) => decisions[item.directive_id]);
 
     if (!plan) return <div style={{ padding: '2rem', fontWeight: 600, fontSize: '1.25rem', color: '#0f172a' }}>Loading Analysis...</div>;
 
-    const items = plan?.output?.action_items || [];
-
-    if (items.length === 0) {
-        return (
-            <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', backgroundColor: '#f8fafc', color: '#0f172a', fontFamily: 'sans-serif' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center', width: '50vw', flexShrink: 0 }}>
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>No Directives Found</h2>
-                    <p style={{ color: '#475569' }}>The system determined there are no actionable compliance directives in this document.</p>
-                    <button onClick={() => router.push(`/dashboard`)} style={{ marginTop: '1.5rem', backgroundColor: '#1d4ed8', color: 'white', padding: '0.5rem 1.5rem', borderRadius: '0.25rem', fontWeight: 600, border: 'none', cursor: 'pointer' }}>Return to Dashboard</button>
-                </div>
-                <div style={{ width: '50vw', flexShrink: 0, borderLeft: '1px solid #e2e8f0', backgroundColor: 'white' }}>
-                    <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                        <Viewer fileUrl={`http://localhost:3001/api/ingest/pdf/${caseId}`} />
-                    </Worker>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', backgroundColor: '#f8fafc', color: '#0f172a', fontFamily: 'sans-serif' }}>
-            <div style={{ width: '50vw', flexShrink: 0, overflowY: 'auto', padding: '2rem' }}>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e3a8a', marginBottom: '0.5rem' }}>Review & Verify</h2>
-                <p style={{ fontSize: '0.875rem', color: '#475569', marginBottom: '1.5rem' }}>Verify extracted directives. <span style={{ color: '#2563eb', fontWeight: 600 }}>Click an item to locate source text.</span></p>
 
-                <input placeholder='Reviewer Name' value={reviewerName} onChange={e => setReviewerName(e.target.value)}
-                    style={{ width: '100%', border: '1px solid #cbd5e1', borderRadius: '0.25rem', padding: '0.75rem', fontSize: '0.875rem', marginBottom: '1.5rem', outline: 'none', color: '#0f172a', backgroundColor: 'white' }}
+            {/* LEFT SIDE: Review Panel */}
+            <div style={{ width: '50vw', flexShrink: 0, overflowY: 'auto', padding: '2rem', position: 'relative' }}>
+
+                {/* TOP BAR: Back Button + Language Dropdown */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                    <button onClick={() => router.push(`/cases/${caseId}/dashboard`)} style={{ padding: '0.5rem 1rem', backgroundColor: '#e2e8f0', color: 'black', border: 'none', borderRadius: '0.25rem', fontWeight: 600, cursor: 'pointer' }}>
+                        {t.back}
+                    </button>
+
+                    <select
+                        value={lang}
+                        onChange={(e) => setLang(e.target.value as any)}
+                        style={{ padding: '0.5rem 1rem', borderRadius: '0.25rem', border: '2px solid #1d4ed8', outline: 'none', fontWeight: 700, backgroundColor: 'white', color: '#1d4ed8', cursor: 'pointer' }}
+                    >
+                        {LANGUAGES.map((l) => (
+                            <option key={l.code} value={l.code}>
+                                {l.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e3a8a', marginBottom: '0.5rem' }}>{t.title}</h2>
+                <p style={{ fontSize: '0.875rem', color: '#475569', marginBottom: '1.5rem' }}>{t.subtitle} <span style={{ color: '#2563eb', fontWeight: 600 }}>{t.clickLocate}</span></p>
+
+                {isLocked && (
+                    <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', padding: '1rem', borderRadius: '0.25rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <span style={{ fontSize: '1.25rem' }}>🔒</span>
+                        <p style={{ fontSize: '0.875rem', fontWeight: 700, color: '#16a34a', margin: 0 }}>
+                            {t.lockedMsg}
+                        </p>
+                    </div>
+                )}
+
+                <input placeholder={t.namePlaceholder} value={reviewerName} onChange={e => setReviewerName(e.target.value)}
+                    disabled={isLocked}
+                    style={{ width: '100%', border: '1px solid #cbd5e1', borderRadius: '0.25rem', padding: '0.75rem', fontSize: '0.875rem', marginBottom: '1.5rem', outline: 'none', color: '#0f172a', backgroundColor: isLocked ? '#f1f5f9' : 'white', opacity: isLocked ? 0.7 : 1 }}
                 />
 
                 {items.map((item: any) => (
@@ -72,56 +109,76 @@ export default function VerifyPage() {
                             </span>
                         </div>
 
-                        <p style={{ fontSize: '0.95rem', fontWeight: 500, color: '#0f172a', lineHeight: '1.5', marginBottom: '1rem' }}>{item.plain_language}</p>
+                        {/* 3. DYNAMIC TRANSLATION FOR THE AI VERDICT */}
+                        <p style={{ fontSize: '0.95rem', fontWeight: 500, color: '#0f172a', lineHeight: '1.5', marginBottom: '1rem' }}>
+                            {lang === 'en' ? item.plain_language :
+                                lang === 'hi' ? (item.hindi_translation || item.plain_language) :
+                                    (item.marathi_translation || item.plain_language)}
+                        </p>
 
                         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', fontSize: '0.8rem', color: '#475569' }}>
-                            <div style={{ border: '1px solid #e2e8f0', padding: '0.4rem 0.75rem', borderRadius: '0.25rem' }}><b>Dept:</b> {item.responsible_department}</div>
-                            <div style={{ border: '1px solid #e2e8f0', padding: '0.4rem 0.75rem', borderRadius: '0.25rem' }}><b>Deadline:</b> {item.comply_deadline}</div>
+                            <div style={{ border: '1px solid #e2e8f0', padding: '0.4rem 0.75rem', borderRadius: '0.25rem' }}><b>{t.dept}</b> {item.responsible_department}</div>
+                            <div style={{ border: '1px solid #e2e8f0', padding: '0.4rem 0.75rem', borderRadius: '0.25rem' }}><b>{t.deadline}</b> {item.comply_deadline}</div>
                         </div>
-
-                        <div style={{ backgroundColor: '#f8fafc', padding: '1rem', border: '1px solid #e2e8f0', borderRadius: '0.25rem', marginBottom: '1rem' }}>
-                            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>Source Evidence</p>
-                            <p style={{ fontSize: '0.85rem', color: '#334155', fontStyle: 'italic', borderLeft: '2px solid #cbd5e1', paddingLeft: '0.5rem', marginBottom: '0.75rem' }}>"{item.source_quote}"</p>
-                            <p style={{ fontSize: '0.8rem', color: '#0f172a', borderTop: '1px solid #e2e8f0', paddingTop: '0.5rem' }}><b>Rationale:</b> {item.urgency_reasoning}</p>
-                        </div>
-
-                        {item.penalty_for_non_compliance && item.penalty_for_non_compliance !== 'None explicitly stated' && (
-                            <div style={{ backgroundColor: '#fff1f2', borderLeft: '3px solid #e11d48', padding: '0.75rem', marginBottom: '1rem', fontSize: '0.8rem' }}>
-                                <p style={{ fontWeight: 700, color: '#be123c', marginBottom: '0.25rem' }}>Compliance Risk</p>
-                                <p style={{ color: '#881337' }}>{item.penalty_for_non_compliance}</p>
-                            </div>
-                        )}
 
                         {!decisions[item.directive_id] ? (
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <button onClick={(e) => { e.stopPropagation(); decide(item.directive_id, 'approved'); }} style={{ flex: 1, backgroundColor: '#16a34a', color: 'white', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, border: 'none', cursor: 'pointer' }}>Approve</button>
-                                <button onClick={(e) => { e.stopPropagation(); decide(item.directive_id, 'rejected'); }} style={{ flex: 1, backgroundColor: 'white', color: '#dc2626', border: '1px solid #fca5a5', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>Reject</button>
+                                <button disabled={isLocked || !reviewerName} onClick={(e) => { e.stopPropagation(); decide(item.directive_id, 'approved'); }}
+                                    style={{ flex: 1, backgroundColor: '#16a34a', color: 'white', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, border: 'none', cursor: isLocked || !reviewerName ? 'not-allowed' : 'pointer', opacity: isLocked || !reviewerName ? 0.5 : 1 }}>
+                                    {t.approve}
+                                </button>
+                                <button disabled={isLocked || !reviewerName} onClick={(e) => { e.stopPropagation(); setRejectModal({ show: true, directiveId: item.directive_id, reason: '' }); }}
+                                    style={{ flex: 1, backgroundColor: 'white', color: '#dc2626', border: '1px solid #fca5a5', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, cursor: isLocked || !reviewerName ? 'not-allowed' : 'pointer', opacity: isLocked || !reviewerName ? 0.5 : 1 }}>
+                                    {t.reject}
+                                </button>
                             </div>
                         ) : (
                             <div style={{ padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, textAlign: 'center', backgroundColor: decisions[item.directive_id] === 'approved' ? '#f0fdf4' : '#fef2f2', color: decisions[item.directive_id] === 'approved' ? '#15803d' : '#b91c1c', border: decisions[item.directive_id] === 'approved' ? '1px solid #bbf7d0' : '1px solid #fecaca' }}>
-                                {decisions[item.directive_id] === 'approved' ? 'Verified & Approved' : 'Rejected by Reviewer'}
+                                {decisions[item.directive_id] === 'approved' ? t.verified : t.rejected}
                             </div>
                         )}
                     </div>
                 ))}
 
-                {allDecided && items.length > 0 && (
-                    <button onClick={() => router.push(`/cases/${caseId}/dashboard`)} style={{ width: '100%', backgroundColor: '#1d4ed8', color: 'white', padding: '1rem', borderRadius: '0.25rem', fontWeight: 700, fontSize: '1rem', marginTop: '1rem', border: 'none', cursor: 'pointer' }}>
-                        Publish Verified Plan to Dashboard →
+                {allDecided && !isLocked && (
+                    <button onClick={() => { setIsLocked(true); router.push(`/cases/${caseId}/dashboard`); }} style={{ width: '100%', backgroundColor: '#1d4ed8', color: 'white', padding: '1rem', borderRadius: '0.25rem', fontWeight: 700, fontSize: '1rem', marginTop: '1rem', border: 'none', cursor: 'pointer' }}>
+                        {t.publishBtn}
                     </button>
                 )}
             </div>
 
+            {/* RIGHT SIDE: PDF */}
             <div style={{ width: '50vw', backgroundColor: '#f1f5f9', borderLeft: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
                 <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid #cbd5e1', backgroundColor: 'white', color: '#334155', fontWeight: 600, fontSize: '0.8rem', display: 'flex', justifyContent: 'space-between' }}>
                     <span>Source Document Viewer</span>
                 </div>
-                <div style={{ flex: 1, overflow: 'hidden' }}>
+
+                {/* THE FIX: overflowY: 'auto' and minHeight: 0 lets the PDF scroll! */}
+                <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
                         <Viewer fileUrl={`http://localhost:3001/api/ingest/pdf/${caseId}`} plugins={[searchPluginInstance]} />
                     </Worker>
                 </div>
             </div>
+
+            {/* REJECTION REASON MODAL */}
+            {rejectModal.show && (
+                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(15, 23, 42, 0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
+                    <div style={{ backgroundColor: 'white', borderRadius: '0.5rem', padding: '2rem', width: '100%', maxWidth: '450px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>Reason for Rejection</h3>
+                        <textarea
+                            style={{ width: '100%', border: '1px solid #cbd5e1', borderRadius: '0.25rem', padding: '0.75rem', fontSize: '0.875rem', height: '120px', outline: 'none', marginBottom: '1.5rem', color: 'black', resize: 'none' }}
+                            placeholder="Why is this AI extraction incorrect or invalid?"
+                            value={rejectModal.reason}
+                            onChange={e => setRejectModal(m => ({ ...m, reason: e.target.value }))}
+                        />
+                        <div style={{ display: 'flex', gap: '1rem' }}>
+                            <button onClick={() => setRejectModal({ show: false, directiveId: '', reason: '' })} style={{ flex: 1, border: '1px solid #cbd5e1', backgroundColor: 'white', color: '#475569', padding: '0.75rem', borderRadius: '0.25rem', fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
+                            <button disabled={!rejectModal.reason.trim()} onClick={() => { decide(rejectModal.directiveId, 'rejected', rejectModal.reason); setRejectModal({ show: false, directiveId: '', reason: '' }); }} style={{ flex: 1, backgroundColor: '#dc2626', color: 'white', border: 'none', padding: '0.75rem', borderRadius: '0.25rem', fontSize: '0.875rem', fontWeight: 600, cursor: !rejectModal.reason.trim() ? 'not-allowed' : 'pointer', opacity: !rejectModal.reason.trim() ? 0.5 : 1 }}>Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

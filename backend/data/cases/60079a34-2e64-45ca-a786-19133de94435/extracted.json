@@ -1,0 +1,56 @@
+{
+  "caseId": "60079a34-2e64-45ca-a786-19133de94435",
+  "uploadedAt": "2026-05-04T13:44:39.729Z",
+  "case_number": "WRIT PETITION NO.15779 OF 2025",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "Giri Textiles, through Proprietor Chandrayya R. Pasnuri",
+  "respondent": "Anthony Nadar And Anr",
+  "government_department_involved": null,
+  "directives": [
+    {
+      "id": "D1",
+      "text": "The writ petition stands dismissed;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "The order dated 22 December 2021 passed by the Labour Court, Thane in Application (BIR) No. 1 of 2014 and the order dated 17 October 2025 passed by the Industrial Court, Thane in Appeal (IC) No. 1 of 2022 are upheld;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "Application (BIR) No. 1 of 2014 shall proceed before the Labour Court, Thane in accordance with law and be decided on its own merits, uninfluenced by any observations made in the impugned orders or in the present judgment, save and except on the issue concluded herein; The Labour Court shall endeavour to dispose of the said application as expeditiously as possible and preferably within a period of six months from the date of receipt of this order;",
+      "deadline_text": "preferably within a period of six months from the date of receipt of this order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "Rule is discharged;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D5",
+      "text": "There shall be no order as to costs.",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D6",
+      "text": "Pending interim applications, if any, stand disposed of.",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": 90,
+  "raw_summary": "The High Court dismissed a writ petition filed by Giri Textiles challenging the lower courts' rejection of their preliminary objection concerning the maintainability of an application by Anthony Nadar. The petitioner argued that an 'approach notice' under the Maharashtra Industrial Relations Act was not issued. The Court upheld the lower courts' decision, finding the objection hypertechnical given the employer's conduct regarding employment details. The Labour Court was directed to dispose of the original application on its merits within six months."
+}

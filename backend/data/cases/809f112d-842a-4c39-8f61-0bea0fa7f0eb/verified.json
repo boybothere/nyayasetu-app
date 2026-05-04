@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "directive_id": "D1",
+      "decision": "approved",
+      "data": null,
+      "reviewer": "Adrian Fernandes",
+      "timestamp": "2026-05-04T13:59:27.516Z"
+    },
+    {
+      "directive_id": "D2",
+      "decision": "rejected",
+      "data": null,
+      "reviewer": "Adrian Fernandes",
+      "timestamp": "2026-05-04T13:59:36.363Z"
+    },
+    {
+      "directive_id": "D3",
+      "decision": "approved",
+      "data": null,
+      "reviewer": "Adrian Fernandes",
+      "timestamp": "2026-05-04T13:59:37.820Z"
+    },
+    {
+      "directive_id": "D4",
+      "decision": "approved",
+      "data": null,
+      "reviewer": "Adrian Fernandes",
+      "timestamp": "2026-05-04T13:59:39.502Z"
+    },
+    {
+      "directive_id": "D5",
+      "decision": "approved",
+      "data": null,
+      "reviewer": "Adrian Fernandes",
+      "timestamp": "2026-05-04T13:59:42.033Z"
+    },
+    {
+      "directive_id": "D6",
+      "decision": "approved",
+      "data": null,
+      "reviewer": "Adrian Fernandes",
+      "timestamp": "2026-05-04T13:59:43.435Z"
+    }
+  ],
+  "allApproved": false
+}

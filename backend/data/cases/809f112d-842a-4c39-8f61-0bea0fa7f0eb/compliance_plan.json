@@ -1,0 +1,69 @@
+{
+  "agent": "Compliance Planner",
+  "timestamp": "2026-05-04T13:56:40.792Z",
+  "output": {
+    "compliance_items": [
+      {
+        "directive_id": "D1",
+        "action_type": "comply",
+        "comply_deadline": "2026-05-04",
+        "appeal_deadline": "2026-08-02",
+        "urgency": "low",
+        "urgency_reasoning": "This directive primarily states the outcome of the writ petition, requiring immediate acknowledgement but no distinct operational steps with a strict deadline.",
+        "penalty_for_non_compliance": "None explicitly stated.",
+        "recommended_action": "Acknowledge the High Court's decision allowing the writ petition and communicate this internally to relevant departments to ensure all subsequent actions align with this ruling."
+      },
+      {
+        "directive_id": "D2",
+        "action_type": "comply",
+        "comply_deadline": "2026-05-04",
+        "appeal_deadline": "2026-08-02",
+        "urgency": "high",
+        "urgency_reasoning": "Ceasing enforcement of a quashed order is an immediate requirement to prevent any further illegal actions or liabilities that could lead to contempt of court.",
+        "penalty_for_non_compliance": "Potential contempt of court if the quashed order continues to be enforced or acted upon.",
+        "recommended_action": "Immediately cease all actions and processes that were based on the Industrial Court's judgment and order dated 19 November 2014, and inform all relevant departments/personnel."
+      },
+      {
+        "directive_id": "D3",
+        "action_type": "comply",
+        "comply_deadline": "2026-05-04",
+        "appeal_deadline": "2026-08-02",
+        "urgency": "medium",
+        "urgency_reasoning": "Acknowledging the dismissal ensures no further administrative relief is erroneously granted based on a complaint that has been rejected, preventing future complications.",
+        "penalty_for_non_compliance": "None explicitly stated, but potential for administrative confusion or incorrect actions if not acknowledged.",
+        "recommended_action": "Update records to reflect the dismissal of Complaint (ULP) No. 202 of 2009 and ensure no further action is taken to provide relief to the respondent based on this complaint."
+      },
+      {
+        "directive_id": "D4",
+        "action_type": "comply",
+        "comply_deadline": "2026-05-04",
+        "appeal_deadline": "2026-08-02",
+        "urgency": "low",
+        "urgency_reasoning": "This directive is a legal formality confirming the finality of the court's prior decisions, requiring no new distinct operational steps.",
+        "penalty_for_non_compliance": "None explicitly stated.",
+        "recommended_action": "Note the finality of the High Court's orders as confirmed by 'Rule is made absolute', solidifying the dismissal of the complaint and quashing of the Industrial Court's order."
+      },
+      {
+        "directive_id": "D5",
+        "action_type": "comply",
+        "comply_deadline": "2026-05-04",
+        "appeal_deadline": "2026-08-02",
+        "urgency": "low",
+        "urgency_reasoning": "There are no financial obligations or actions required regarding legal costs, making the urgency low.",
+        "penalty_for_non_compliance": "None explicitly stated.",
+        "recommended_action": "Record that no costs have been awarded to either party and ensure no attempts are made to recover or disburse costs related to this case."
+      },
+      {
+        "directive_id": "D6",
+        "action_type": "comply",
+        "comply_deadline": "2026-05-04",
+        "appeal_deadline": "2026-08-02",
+        "urgency": "medium",
+        "urgency_reasoning": "Ensuring all pending interim matters are officially closed prevents unnecessary follow-up actions or administrative oversight.",
+        "penalty_for_non_compliance": "None explicitly stated.",
+        "recommended_action": "Verify if any interim applications were pending related to this case and ensure they are formally closed in the internal administrative system."
+      }
+    ],
+    "summary": "The High Court has unequivocally ruled in favor of 'The Principal, Modern College' by allowing their writ petition, quashing the Industrial Court's order of 19 November 2014, and dismissing the respondent's complaint. The Government of India, or any concerned entity, must immediately comply by ceasing any actions based on the quashed Industrial Court order and acknowledging the dismissal of the original complaint. While no explicit penalties are mentioned for specific directives, continuing to act on the quashed order could lead to contempt of court. An appeal against this High Court judgment to the Supreme Court must be filed by 2026-08-02, should the government choose to pursue it as an aggrieved party. All related administrative records should be updated to reflect this final disposition."
+  }
+}

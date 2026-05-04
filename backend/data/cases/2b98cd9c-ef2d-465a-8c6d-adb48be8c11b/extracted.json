@@ -1,0 +1,56 @@
+{
+  "caseId": "2b98cd9c-ef2d-465a-8c6d-adb48be8c11b",
+  "uploadedAt": "2026-05-04T13:48:14.828Z",
+  "case_number": "WRIT PETITION NO.15779 OF 2025",
+  "date_of_order": "2026-04-30",
+  "court_name": "High Court of Judicature at Bombay",
+  "petitioner": "Giri Textiles, through Proprietor Chandrayya R. Pasnuri",
+  "respondent": "Anthony Nadar And Anr",
+  "government_department_involved": null,
+  "directives": [
+    {
+      "id": "D1",
+      "text": "The writ petition stands dismissed;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Application (BIR) No. 1 of 2014 shall proceed before the Labour Court, Thane in accordance with law and be decided on its own merits, uninfluenced by any observations made in the impugned orders or in the present judgment, save and except on the issue concluded herein;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "The Labour Court shall endeavour to dispose of the said application as expeditiously as possible and preferably within a period of six months from the date of receipt of this order;",
+      "deadline_text": "within a period of six months from the date of receipt of this order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "Rule is discharged;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D5",
+      "text": "There shall be no order as to costs.",
+      "deadline_text": null,
+      "involves_payment": true,
+      "payment_amount": null
+    },
+    {
+      "id": "D6",
+      "text": "Pending interim applications, if any, stand disposed of.",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": 90,
+  "raw_summary": "The High Court dismissed a writ petition by Giri Textiles, upholding lower court orders that rejected the petitioner's objection to the maintainability of an application. The objection claimed the respondent failed to issue a mandatory 'approach notice' under the Maharashtra Industrial Relations Act. The Court ruled that strict procedural compliance could not be insisted upon due to the employer's conduct obscuring the employment relationship and lack of clear termination communication. The Labour Court was directed to proceed with the main application expeditiously."
+}

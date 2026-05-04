@@ -1,0 +1,42 @@
+{
+  "caseId": "7c28b3b7-3538-495e-b219-2031d1b841af",
+  "uploadedAt": "2026-05-04T13:55:38.375Z",
+  "case_number": "WRIT PETITION NO. 79 OF 2015",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "The Principal, Modern College of Arts, Science and Commerce, Shivaji Nagar, Pune- 5",
+  "respondent": "Vineeta Dass",
+  "government_department_involved": null,
+  "directives": [
+    {
+      "id": "D1",
+      "text": "The Writ Petition is allowed;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "The judgment and order dated 19 November 2014 passed by the learned Member, Industrial Court, Pune in Complaint (ULP) No. 202 of 2009 is quashed and set aside;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "Complaint (ULP) No. 202 of 2009 filed by the respondent stands dismissed;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "In the facts and circumstances of the case, there shall be no order as to costs;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": null,
+  "raw_summary": "The High Court allowed the writ petition filed by The Principal, Modern College of Arts, Science and Commerce, challenging an Industrial Court order. The Industrial Court had found the college guilty of unfair labor practices and directed it to pay the respondent, Vineeta Dass, salary in the pay scale applicable to Junior Clerks in aided colleges, along with arrears. The High Court quashed and set aside the Industrial Court's order, dismissing the original complaint, finding that the respondent failed to establish entitlement to the claimed pay scale or a permanent post."
+}

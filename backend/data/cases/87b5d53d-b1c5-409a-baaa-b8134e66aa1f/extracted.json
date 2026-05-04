@@ -1,0 +1,35 @@
+{
+  "caseId": "87b5d53d-b1c5-409a-baaa-b8134e66aa1f",
+  "uploadedAt": "2026-05-04T13:48:29.275Z",
+  "case_number": "WRIT PETITION NO.15779 OF 2025",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "Giri Textiles, through Proprietor Chandrayya R. Pasnuri",
+  "respondent": "Anthony Nadar And Anr",
+  "government_department_involved": null,
+  "directives": [
+    {
+      "id": "D1",
+      "text": "The writ petition stands dismissed;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Application (BIR) No. 1 of 2014 shall proceed before the Labour Court, Thane in accordance with law and be decided on its own merits, uninfluenced by any observations made in the impugned orders or in the present judgment, save and except on the issue concluded herein;",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "The Labour Court shall endeavour to dispose of the said application as expeditiously as possible and preferably within a period of six months from the date of receipt of this order;",
+      "deadline_text": "within a period of six months from the date of receipt of this order",
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": 90,
+  "raw_summary": "Giri Textiles challenged lower court orders which rejected its objection to the maintainability of an application filed by Anthony Nadar, arguing that no statutory 'approach notice' was issued. The High Court dismissed the writ petition, upholding the lower courts' view that strict insistence on the notice was not warranted given the employer's conduct and the disputed employment relationship. The Labour Court was directed to dispose of the underlying application expeditiously, preferably within six months."
+}

@@ -41,6 +41,12 @@ export const api = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         }).then(r => r.json()),
+    // Add this inside your exported api object
+    getExistingDecisions: async (caseId: string) => {
+        const res = await fetch(`${BASE}/verify/${caseId}/decisions`); // Changed BASE_URL to BASE
+        if (!res.ok) return { items: [] };
+        return res.json();
+    },
 
     getDashboard: async (caseId: string) =>
         fetch(`${BASE}/dashboard/${caseId}`).then(r => r.json()),

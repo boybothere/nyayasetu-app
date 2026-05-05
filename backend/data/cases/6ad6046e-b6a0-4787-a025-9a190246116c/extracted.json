@@ -1,0 +1,28 @@
+{
+  "caseId": "6ad6046e-b6a0-4787-a025-9a190246116c",
+  "uploadedAt": "2026-05-05T12:05:18.075Z",
+  "case_number": "WRIT PETITION NO. 79 OF 2015",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "The Principal, Modern College of Arts, Science and Commerce, Shivaji Nagar, Pune- 5",
+  "respondent": "Vineeta Dass",
+  "government_department_involved": null,
+  "directives": [
+    {
+      "id": "D1",
+      "text": "The judgment and order dated 19 November 2014 passed by the learned Member, Industrial Court, Pune in Complaint (ULP) No. 202 of 2009 is quashed and set aside",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Complaint (ULP) No. 202 of 2009 filed by the respondent stands dismissed",
+      "deadline_text": null,
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": 90,
+  "raw_summary": "The Bombay High Court allowed a writ petition, quashing and setting aside a prior order by the Industrial Court. The Industrial Court had found the petitioner institution guilty of unfair labor practices and directed payment of salary in a prescribed pay scale. The High Court dismissed the respondent's complaint, finding insufficient particulars and a lack of legal basis for the claim of unfair labor practice and entitlement to the claimed pay scale."
+}

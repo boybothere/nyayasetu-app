@@ -1,0 +1,50 @@
+{
+  "agent": "NyayaSetu",
+  "timestamp": "2026-05-05T12:05:35.947Z",
+  "output": {
+    "action_items": [
+      {
+        "directive_id": "D1",
+        "source_quote": "The judgment and order dated 19 November 2014 passed by the learned Member, Industrial Court, Pune in Complaint (ULP) No. 202 of 2009 is quashed and set aside",
+        "plain_language": "The previous order from the Industrial Court, Pune, dated November 19, 2014, concerning Complaint (ULP) No. 202 of 2009, must be considered void and invalid.",
+        "hindi_summary": "औद्योगिक न्यायालय, पुणे का १९ नवंबर २०१४ का निर्णय, शिकायत (यूएलपी) संख्या २०2 of 2009, रद्द और अमान्य माना जाए।",
+        "responsible_department": "Industrial Court, Pune",
+        "responsible_officer": "Member, Industrial Court",
+        "comply_deadline": "2026-07-29",
+        "appeal_deadline": null,
+        "urgency": "high",
+        "urgency_reasoning": "The directive to quash and set aside a previous court order requires immediate acknowledgment and implementation.",
+        "action_type": "comply",
+        "steps": [
+          "Formally record that the Industrial Court order dated November 19, 2014, in Complaint (ULP) No. 202 of 2009 is quashed and set aside as per the High Court's order.",
+          "Update all relevant records to reflect the quashing of the said order.",
+          "Communicate this compliance to all relevant parties, if required by procedure."
+        ],
+        "confidence_score": 0.95,
+        "penalty_for_non_compliance": "Contempt of court proceedings are a risk."
+      },
+      {
+        "directive_id": "D2",
+        "source_quote": "Complaint (ULP) No. 202 of 2009 filed by the respondent stands dismissed",
+        "plain_language": "The case filed by the respondent, known as Complaint (ULP) No. 202 of 2009, must be officially dismissed.",
+        "hindi_summary": "प्रतिवादी द्वारा दायर शिकायत (यूएलपी) संख्या २०2 of 2009, खारिज की जाती है।",
+        "responsible_department": "Industrial Court, Pune",
+        "responsible_officer": "Member, Industrial Court",
+        "comply_deadline": "2026-07-29",
+        "appeal_deadline": null,
+        "urgency": "high",
+        "urgency_reasoning": "The directive to dismiss the complaint requires immediate action to close the case.",
+        "action_type": "comply",
+        "steps": [
+          "Formally record the dismissal of Complaint (ULP) No. 202 of 2009 as ordered by the High Court.",
+          "Update case management systems to reflect the dismissal.",
+          "Notify the parties involved about the dismissal of the complaint."
+        ],
+        "confidence_score": 0.95,
+        "penalty_for_non_compliance": "Contempt of court proceedings are a risk."
+      }
+    ],
+    "overall_risk": "low",
+    "case_summary": "The Bombay High Court has allowed a writ petition, quashing an earlier Industrial Court order that found unfair labour practices and ordered back payments. The complaint has now been dismissed by the High Court due to insufficient pleading and failure to establish parity."
+  }
+}

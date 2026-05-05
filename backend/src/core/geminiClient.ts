@@ -3,7 +3,6 @@ dotenv.config();
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-console.log("Gemini Key Loaded:", process.env.GEMINI_API_KEY?.slice(0, 10));
 export async function callGemini(
     systemPrompt: string,
     userMessage: string,

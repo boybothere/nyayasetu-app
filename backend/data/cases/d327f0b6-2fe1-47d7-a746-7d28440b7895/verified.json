@@ -1,0 +1,45 @@
+{
+  "items": [
+    {
+      "directive_id": "D1",
+      "decision": "approved",
+      "rejection_reason": null,
+      "data": null,
+      "reviewer": "Adv Adrian Fernandes",
+      "timestamp": "2026-05-05T20:06:26.681Z"
+    },
+    {
+      "directive_id": "D2",
+      "decision": "approved",
+      "rejection_reason": null,
+      "data": null,
+      "reviewer": "Adv Adrian Fernandes",
+      "timestamp": "2026-05-05T20:06:28.511Z"
+    },
+    {
+      "directive_id": "D3",
+      "decision": "rejected",
+      "rejection_reason": "Not accurate.",
+      "data": null,
+      "reviewer": "Adv Adrian Fernandes",
+      "timestamp": "2026-05-05T20:06:47.598Z"
+    },
+    {
+      "directive_id": "D4",
+      "decision": "approved",
+      "rejection_reason": null,
+      "data": null,
+      "reviewer": "Adv Adrian Fernandes",
+      "timestamp": "2026-05-05T20:06:49.524Z"
+    },
+    {
+      "directive_id": "D5",
+      "decision": "rejected",
+      "rejection_reason": "Not accurate.",
+      "data": null,
+      "reviewer": "Adv Adrian Fernandes",
+      "timestamp": "2026-05-05T20:06:57.298Z"
+    }
+  ],
+  "allApproved": false
+}

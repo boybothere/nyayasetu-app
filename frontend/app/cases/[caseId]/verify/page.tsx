@@ -1,9 +1,9 @@
 "use client";
+
 import { UI_DICT, LANGUAGES } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-
 import { Viewer, Worker } from '@react-pdf-viewer/core';
 import { searchPlugin } from '@react-pdf-viewer/search';
 
@@ -16,29 +16,29 @@ export default function VerifyPage() {
     const [plan, setPlan] = useState<any>(null);
     const [decisions, setDecisions] = useState<Record<string, string>>({});
     const [reviewerName, setReviewerName] = useState('');
-
     const [isLocked, setIsLocked] = useState(false);
     const [rejectModal, setRejectModal] = useState({ show: false, directiveId: '', reason: '' });
-
     const [lang, setLang] = useState<'en' | 'hi' | 'mr'>('en');
-    const t = UI_DICT[lang];
 
+    const t = UI_DICT[lang];
     const searchPluginInstance = searchPlugin();
     const { highlight } = searchPluginInstance;
 
     useEffect(() => {
         if (caseId) {
             api.getVerification(caseId).then(setPlan);
-            api.getExistingDecisions(caseId).then((verified: any) => {
-                if (verified?.items && verified.items.length > 0) {
-                    const existingDecisions: Record<string, string> = {};
-                    verified.items.forEach((item: any) => {
-                        existingDecisions[item.directive_id] = item.decision;
-                    });
-                    setDecisions(existingDecisions);
-                    setIsLocked(true);
-                }
-            }).catch(console.error);
+            api.getExistingDecisions(caseId)
+                .then((verified: any) => {
+                    if (verified?.items && verified.items.length > 0) {
+                        const existingDecisions: Record<string, string> = {};
+                        verified.items.forEach((item: any) => {
+                            existingDecisions[item.directive_id] = item.decision;
+                        });
+                        setDecisions(existingDecisions);
+                        setIsLocked(true);
+                    }
+                })
+                .catch(console.error);
         }
     }, [caseId]);
 
@@ -52,7 +52,9 @@ export default function VerifyPage() {
         setDecisions(d => ({ ...d, [directiveId]: decision }));
     };
 
-    const handleHighlight = (quote: string) => { if (quote) highlight(quote); };
+    const handleHighlight = (quote: string) => {
+        if (quote) highlight(quote);
+    };
 
     const items = plan?.output?.action_items || [];
     const allDecided = items.length > 0 && items.every((item: any) => decisions[item.directive_id]);
@@ -61,14 +63,14 @@ export default function VerifyPage() {
 
     return (
         <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', backgroundColor: '#f8fafc', color: '#0f172a', fontFamily: 'sans-serif' }}>
-
             <div style={{ width: '50vw', flexShrink: 0, overflowY: 'auto', padding: '2rem', position: 'relative' }}>
-
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                    <button onClick={() => router.push(`/cases/${caseId}/dashboard`)} style={{ padding: '0.5rem 1rem', backgroundColor: '#e2e8f0', color: 'black', border: 'none', borderRadius: '0.25rem', fontWeight: 600, cursor: 'pointer' }}>
+                    <button
+                        onClick={() => router.push(`/cases/${caseId}/dashboard`)}
+                        style={{ padding: '0.5rem 1rem', backgroundColor: '#e2e8f0', color: 'black', border: 'none', borderRadius: '0.25rem', fontWeight: 600, cursor: 'pointer' }}
+                    >
                         {t.back}
                     </button>
-
                     <select
                         value={lang}
                         onChange={(e) => setLang(e.target.value as any)}
@@ -94,15 +96,20 @@ export default function VerifyPage() {
                     </div>
                 )}
 
-                <input placeholder={t.namePlaceholder} value={reviewerName} onChange={e => setReviewerName(e.target.value)}
+                <input
+                    placeholder={t.namePlaceholder}
+                    value={reviewerName}
+                    onChange={e => setReviewerName(e.target.value)}
                     disabled={isLocked}
                     style={{ width: '100%', border: '1px solid #cbd5e1', borderRadius: '0.25rem', padding: '0.75rem', fontSize: '0.875rem', marginBottom: '1.5rem', outline: 'none', color: '#0f172a', backgroundColor: isLocked ? '#f1f5f9' : 'white', opacity: isLocked ? 0.7 : 1 }}
                 />
 
                 {items.map((item: any) => (
-                    <div key={item.directive_id} onClick={() => handleHighlight(item.source_quote)}
-                        style={{ cursor: 'pointer', backgroundColor: 'white', borderRadius: '0.5rem', padding: '1.5rem', marginBottom: '1.5rem', borderLeft: decisions[item.directive_id] === 'approved' ? '4px solid #16a34a' : decisions[item.directive_id] === 'rejected' ? '4px solid #dc2626' : '4px solid #3b82f6', borderTop: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
-
+                    <div
+                        key={item.directive_id}
+                        onClick={() => handleHighlight(item.source_quote)}
+                        style={{ cursor: 'pointer', backgroundColor: 'white', borderRadius: '0.5rem', padding: '1.5rem', marginBottom: '1.5rem', borderLeft: decisions[item.directive_id] === 'approved' ? '4px solid #16a34a' : decisions[item.directive_id] === 'rejected' ? '4px solid #dc2626' : '4px solid #3b82f6', borderTop: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}
+                    >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#1e40af', letterSpacing: '0.05em' }}>{item.directive_id}</span>
                             <span style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', fontWeight: 600, backgroundColor: item.urgency === 'critical' ? '#fee2e2' : item.urgency === 'high' ? '#ffedd5' : '#f1f5f9', color: item.urgency === 'critical' ? '#991b1b' : item.urgency === 'high' ? '#9a3412' : '#334155' }}>
@@ -111,9 +118,7 @@ export default function VerifyPage() {
                         </div>
 
                         <p style={{ fontSize: '0.95rem', fontWeight: 500, color: '#0f172a', lineHeight: '1.5', marginBottom: '1rem' }}>
-                            {lang === 'en' ? item.plain_language :
-                                lang === 'hi' ? (item.hindi_translation || item.plain_language) :
-                                    (item.marathi_translation || item.plain_language)}
+                            {lang === 'en' ? item.plain_language : lang === 'hi' ? (item.hindi_translation || item.plain_language) : (item.marathi_translation || item.plain_language)}
                         </p>
 
                         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', fontSize: '0.8rem', color: '#475569' }}>
@@ -123,12 +128,18 @@ export default function VerifyPage() {
 
                         {!decisions[item.directive_id] ? (
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <button disabled={isLocked || !reviewerName} onClick={(e) => { e.stopPropagation(); decide(item.directive_id, 'approved'); }}
-                                    style={{ flex: 1, backgroundColor: '#16a34a', color: 'white', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, border: 'none', cursor: isLocked || !reviewerName ? 'not-allowed' : 'pointer', opacity: isLocked || !reviewerName ? 0.5 : 1 }}>
+                                <button
+                                    disabled={isLocked || !reviewerName}
+                                    onClick={(e) => { e.stopPropagation(); decide(item.directive_id, 'approved'); }}
+                                    style={{ flex: 1, backgroundColor: '#16a34a', color: 'white', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, border: 'none', cursor: isLocked || !reviewerName ? 'not-allowed' : 'pointer', opacity: isLocked || !reviewerName ? 0.5 : 1 }}
+                                >
                                     {t.approve}
                                 </button>
-                                <button disabled={isLocked || !reviewerName} onClick={(e) => { e.stopPropagation(); setRejectModal({ show: true, directiveId: item.directive_id, reason: '' }); }}
-                                    style={{ flex: 1, backgroundColor: 'white', color: '#dc2626', border: '1px solid #fca5a5', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, cursor: isLocked || !reviewerName ? 'not-allowed' : 'pointer', opacity: isLocked || !reviewerName ? 0.5 : 1 }}>
+                                <button
+                                    disabled={isLocked || !reviewerName}
+                                    onClick={(e) => { e.stopPropagation(); setRejectModal({ show: true, directiveId: item.directive_id, reason: '' }); }}
+                                    style={{ flex: 1, backgroundColor: 'white', color: '#dc2626', border: '1px solid #fca5a5', padding: '0.5rem', borderRadius: '0.25rem', fontSize: '0.85rem', fontWeight: 600, cursor: isLocked || !reviewerName ? 'not-allowed' : 'pointer', opacity: isLocked || !reviewerName ? 0.5 : 1 }}
+                                >
                                     {t.reject}
                                 </button>
                             </div>
@@ -141,7 +152,10 @@ export default function VerifyPage() {
                 ))}
 
                 {allDecided && !isLocked && (
-                    <button onClick={() => { setIsLocked(true); router.push(`/cases/${caseId}/dashboard`); }} style={{ width: '100%', backgroundColor: '#1d4ed8', color: 'white', padding: '1rem', borderRadius: '0.25rem', fontWeight: 700, fontSize: '1rem', marginTop: '1rem', border: 'none', cursor: 'pointer' }}>
+                    <button
+                        onClick={() => { setIsLocked(true); router.push(`/cases/${caseId}/dashboard`); }}
+                        style={{ width: '100%', backgroundColor: '#1d4ed8', color: 'white', padding: '1rem', borderRadius: '0.25rem', fontWeight: 700, fontSize: '1rem', marginTop: '1rem', border: 'none', cursor: 'pointer' }}
+                    >
                         {t.publishBtn}
                     </button>
                 )}
@@ -151,13 +165,9 @@ export default function VerifyPage() {
                 <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid #cbd5e1', backgroundColor: 'white', color: '#334155', fontWeight: 600, fontSize: '0.8rem', display: 'flex', justifyContent: 'space-between' }}>
                     <span>Source Document Viewer</span>
                 </div>
-
                 <div style={{ height: '750px', width: '100%' }}>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                        <Viewer
-                            fileUrl={`${process.env.NEXT_PUBLIC_API_URL || ''}api/ingest/pdf/${caseId}`}
-                            plugins={[searchPluginInstance]}
-                        />
+                        <Viewer fileUrl={`${process.env.NEXT_PUBLIC_API_URL || ''}api/ingest/pdf/${caseId}`} plugins={[searchPluginInstance]} />
                     </Worker>
                 </div>
             </div>
@@ -173,8 +183,19 @@ export default function VerifyPage() {
                             onChange={e => setRejectModal(m => ({ ...m, reason: e.target.value }))}
                         />
                         <div style={{ display: 'flex', gap: '1rem' }}>
-                            <button onClick={() => setRejectModal({ show: false, directiveId: '', reason: '' })} style={{ flex: 1, border: '1px solid #cbd5e1', backgroundColor: 'white', color: '#475569', padding: '0.75rem', borderRadius: '0.25rem', fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                            <button disabled={!rejectModal.reason.trim()} onClick={() => { decide(rejectModal.directiveId, 'rejected', rejectModal.reason); setRejectModal({ show: false, directiveId: '', reason: '' }); }} style={{ flex: 1, backgroundColor: '#dc2626', color: 'white', border: 'none', padding: '0.75rem', borderRadius: '0.25rem', fontSize: '0.875rem', fontWeight: 600, cursor: !rejectModal.reason.trim() ? 'not-allowed' : 'pointer', opacity: !rejectModal.reason.trim() ? 0.5 : 1 }}>Confirm</button>
+                            <button
+                                onClick={() => setRejectModal({ show: false, directiveId: '', reason: '' })}
+                                style={{ flex: 1, border: '1px solid #cbd5e1', backgroundColor: 'white', color: '#475569', padding: '0.75rem', borderRadius: '0.25rem', fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer' }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                disabled={!rejectModal.reason.trim()}
+                                onClick={() => { decide(rejectModal.directiveId, 'rejected', rejectModal.reason); setRejectModal({ show: false, directiveId: '', reason: '' }); }}
+                                style={{ flex: 1, backgroundColor: '#dc2626', color: 'white', border: 'none', padding: '0.75rem', borderRadius: '0.25rem', fontSize: '0.875rem', fontWeight: 600, cursor: !rejectModal.reason.trim() ? 'not-allowed' : 'pointer', opacity: !rejectModal.reason.trim() ? 0.5 : 1 }}
+                            >
+                                Confirm
+                            </button>
                         </div>
                     </div>
                 </div>

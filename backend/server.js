@@ -9,6 +9,10 @@ import { execSync } from 'child_process';
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { LegalAnalyst } from "./src/agents/legalAnalyst.ts";
+import { CompliancePlanner } from "./src/agents/compliancePlanner.ts";
+import { ImplementationOfficer } from "./src/agents/implementationOfficer.ts";
+import { PrecedentChecker } from "./src/agents/precedentChecker.ts";
 
 dotenv.config();
 
@@ -155,8 +159,40 @@ app.post('/api/ingest/upload', upload.single('judgment'), async (req, res) => {
         }
 
         const extractionPrompt = `
-You are a legal document analyst for Indian High Court judgments.
-Extract the following from this judgment text and return ONLY valid JSON:
+You are a legal workflow extraction system for Indian court judgments.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL OBJECTIVE
+━━━━━━━━━━━━━━━━━━━━━━━
+Convert the judgment into MULTIPLE ACTIONABLE GOVERNMENT TASKS.
+
+This is NOT pure legal extraction.
+This is OPERATIONAL BREAKDOWN.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+RULES (STRICT)
+━━━━━━━━━━━━━━━━━━━━━━━
+- You MUST NOT return only 1 directive
+- Even if the judgment has 1 main order → break it into MULTIPLE actionable steps
+- Each directive must represent ONE clear action
+
+━━━━━━━━━━━━━━━━━━━━━━━
+HOW TO BREAK DIRECTIVES
+━━━━━━━━━━━━━━━━━━━━━━━
+
+If court says:
+"Dispose within 6 months"
+
+You MUST expand into steps like:
+1. Register and acknowledge the court order
+2. Forward the order to the concerned court/department
+3. Schedule internal tracking for deadline
+4. Ensure action is completed within deadline
+5. File compliance report
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Return ONLY valid JSON:
 {
   "case_number": "",
   "date_of_order": "YYYY-MM-DD",
@@ -167,27 +203,56 @@ Extract the following from this judgment text and return ONLY valid JSON:
   "directives": [
     {
       "id": "D1",
-      "text": "exact directive from judgment",
-      "deadline_text": "as mentioned in judgment e.g. within 60 days",
+      "text": "First actionable step",
+      "deadline_text": "...",
       "involves_payment": false,
       "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Second actionable step"
     }
   ],
   "limitation_period_days": 90,
-  "raw_summary": "2-3 sentence summary of the judgment"
+  "raw_summary": "..."
 }
-Judgment text:\n\n${rawText.slice(0, 30000)}`;
+
+MANDATORY:
+- Minimum 3 directives
+- Prefer 4–6 directives
+- Never return only 1
+
+Judgment text:
+${rawText.slice(0, 30000)}
+`;
+
 
         const result = await model.generateContent(extractionPrompt);
         const rawOutput = result.response.text();
 
         let extracted;
-        try {
-            const cleaned = rawOutput.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-            extracted = JSON.parse(cleaned);
-        } catch (parseError) {
-            console.error("RAW AI OUTPUT THAT BROKE PARSER:\n", rawOutput);
-            throw new Error("AI generated invalid JSON. Please try uploading again.");
+
+        for (let attempt = 1; attempt <= 2; attempt++) {
+            const result = await model.generateContent(extractionPrompt);
+            const rawOutput = result.response.text();
+
+            try {
+                const cleaned = rawOutput.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+                extracted = JSON.parse(cleaned);
+
+                if (extracted.directives && extracted.directives.length >= 3) {
+                    break;
+                }
+
+                console.log(`Attempt ${attempt}: Only ${extracted.directives?.length} directives`);
+
+            } catch (err) {
+                console.log(`Attempt ${attempt}: JSON parse failed`);
+            }
+        }
+
+        if (!extracted || !extracted.directives || extracted.directives.length < 3) {
+            throw new Error("Extraction failed: model did not produce enough directives");
         }
 
         writeCase(caseId, 'extracted.json', {
@@ -228,7 +293,7 @@ app.get('/api/ingest/pdf/:caseId', (req, res) => {
 //  AGENTS ROUTE
 // ═══════════════════════════════════════════════════════════════
 
-/// POST /api/agents/run/:caseId — run AI agent pipeline (SSE)
+// POST /api/agents/run/:caseId — run AI agent pipeline (SSE)
 app.post('/api/agents/run/:caseId', async (req, res) => {
     const { caseId } = req.params;
 
@@ -241,115 +306,64 @@ app.post('/api/agents/run/:caseId', async (req, res) => {
     try {
         const extracted = readCase(caseId, 'extracted.json');
         if (!extracted) {
-            console.error(`[Error] Case ${caseId} not found or not extracted yet.`);
             send('error', { message: 'Case not found or not extracted yet' });
             return res.end();
         }
 
-        console.log(`\n[NyayaSetu] Booting Multi-Agent Pipeline for Case: ${caseId}`);
+        console.log(`\n[NyayaSetu] Running REAL Multi-Agent Pipeline for Case: ${caseId}`);
 
+        // ───────── Agent 1: Legal Analyst ─────────
         send('agent_start', { agent: 'Legal Analyst' });
-        console.log("[Agent 1] Legal Analyst: Scanning judgment text...");
 
-        send('agent_start', { agent: 'Compliance Planner' });
-        console.log("[Agent 2] Compliance Planner: Structuring directives...");
+        const legalAgent = new LegalAnalyst();
+        await legalAgent.run(caseId, "extracted.json");
 
-        send('agent_start', { agent: 'Implementation Officer' });
-        console.log("[Agent 3] Implementation Officer: Mapping departments & urgency...");
-
-        send('agent_start', { agent: 'Precedent Checker' });
-        console.log("[Agent 4] Precedent Checker: Cross-referencing legal risks...");
-
-        const agentPrompt = `
-You are a legal compliance AI for Indian government departments.
-Analyze this extracted court judgment and generate a structured action plan.
-Return ONLY valid JSON with this exact structure:
-{
-  "action_items": [
-    {
-      "directive_id": "D1",
-      "source_quote": "exact quote from the judgment text",
-      "plain_language": "what needs to be done in simple English",
-      "hindi_summary": "एक वाक्य में हिंदी में",
-      "responsible_department": "exact government department name",
-      "responsible_officer": "designation e.g. Secretary PWD",
-      "comply_deadline": "YYYY-MM-DD",
-      "appeal_deadline": "YYYY-MM-DD",
-      "urgency": "critical|high|medium|low",
-      "urgency_reasoning": "why this urgency level",
-      "action_type": "comply|appeal|both",
-      "steps": ["step 1", "step 2", "step 3"],
-      "confidence_score": 0.9,
-      "penalty_for_non_compliance": "describe contempt risk or None explicitly stated"
-    }
-  ],
-  "overall_risk": "low|medium|high",
-  "case_summary": "2-3 sentence plain language summary"
-}
-Case data: ${JSON.stringify(extracted, null, 2)}`;
-
-        console.log("[Gemini Engine] Processing multi-agent reasoning. Please wait...");
-        const result = await model.generateContent(agentPrompt);
-        const rawOutput = result.response.text();
-
-        let actionPlan;
-        try {
-            const cleaned = rawOutput.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-            actionPlan = JSON.parse(cleaned);
-        } catch {
-            console.error("[Error] Agent generated invalid JSON.");
-            throw new Error('Agent generated invalid JSON');
-        }
-
-        console.log("[Gemini Engine] Processing Complete!");
-
-        // Agent 1: Saves Legal Analysis
         send('agent_done', { agent: 'Legal Analyst' });
-        writeCase(caseId, 'legal_analysis.json', {
-            agent: 'Legal Analyst',
-            task: 'Extract Directives',
-            timestamp: new Date().toISOString(),
-            status: 'completed'
-        });
-        console.log("[Agent 1] Legal Analyst: Finished.");
 
-        // Agent 2: Saves Compliance Plan
+
+        // ───────── Agent 2: Compliance Planner ─────────
+        send('agent_start', { agent: 'Compliance Planner' });
+
+        const complianceAgent = new CompliancePlanner();
+        await complianceAgent.run(caseId, "legal_analysis.json");
+
         send('agent_done', { agent: 'Compliance Planner' });
-        writeCase(caseId, 'compliance_plan.json', {
-            agent: 'Compliance Planner',
-            task: 'Structure Deadlines',
-            timestamp: new Date().toISOString(),
-            status: 'completed'
-        });
-        console.log("[Agent 2] Compliance Planner: Finished.");
 
-        // Agent 3: Saves Implementation Plan
+
+        // ───────── Agent 3: Implementation Officer ─────────
+        send('agent_start', { agent: 'Implementation Officer' });
+
+        const implementationAgent = new ImplementationOfficer();
+        await implementationAgent.run(caseId, "compliance_plan.json");
+
         send('agent_done', { agent: 'Implementation Officer' });
-        writeCase(caseId, 'implementation_plan.json', {
-            agent: 'Implementation Officer',
-            task: 'Assign Departments',
-            timestamp: new Date().toISOString(),
-            status: 'completed'
-        });
-        console.log("[Agent 3] Implementation Officer: Delegated tasks.");
 
-        // Agent 4: Saves Precedent & All Agent Data
+
+        // ───────── Merge data for final agent ─────────
+        const legalData = readCase(caseId, "legal_analysis.json");
+        const complianceData = readCase(caseId, "compliance_plan.json");
+        const implementationData = readCase(caseId, "implementation_plan.json");
+        const extractedData = readCase(caseId, "extracted.json");
+
+        writeCase(caseId, "merged_input.json", {
+            extracted: extractedData,
+            legal: legalData,
+            compliance: complianceData,
+            implementation: implementationData
+        });
+
+
+        // ───────── Agent 4: Precedent Checker ─────────
+        send('agent_start', { agent: 'Precedent Checker' });
+
+        const precedentAgent = new PrecedentChecker();
+        await precedentAgent.run(caseId, "merged_input.json");
+
         send('agent_done', { agent: 'Precedent Checker' });
-        writeCase(caseId, 'all_agent_data.json', {
-            agent: 'System',
-            compiled: true,
-            timestamp: new Date().toISOString()
-        });
-        console.log("[Agent 4] Precedent Checker: Risk verified.");
 
-        // Final System Output
-        writeCase(caseId, 'action_plan.json', {
-            agent: 'NyayaSetu Master',
-            timestamp: new Date().toISOString(),
-            output: actionPlan
-        });
 
-        console.log(`[NyayaSetu] Action Plan and all Agent artifacts saved to database. Redirecting UI...`);
+        console.log(`[NyayaSetu] Pipeline complete`);
+
         send('all_done', { caseId, redirect: `/cases/${caseId}/verify` });
         res.end();
 
@@ -359,7 +373,6 @@ Case data: ${JSON.stringify(extracted, null, 2)}`;
         res.end();
     }
 });
-
 // ═══════════════════════════════════════════════════════════════
 //  VERIFY ROUTES
 // ═══════════════════════════════════════════════════════════════

@@ -96,7 +96,7 @@ export default function ComplianceCommandCenter() {
 
                         <div style={{ marginTop: '2rem' }}>
                             <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1rem' }}>
-                                🔍 Behind the Scenes: Raw MCP Database Hits
+                                Behind the Scenes: Raw MCP Database Hits
                             </h2>
                             <div style={{ backgroundColor: '#1e293b', borderRadius: '0.5rem', padding: '1rem', overflowX: 'auto' }}>
                                 <pre style={{ color: '#38bdf8', fontSize: '0.8rem', margin: 0 }}>

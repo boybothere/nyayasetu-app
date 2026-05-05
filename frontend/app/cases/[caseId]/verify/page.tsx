@@ -150,7 +150,7 @@ export default function VerifyPage() {
 
                 <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                        <Viewer fileUrl={`http://localhost:3001/api/ingest/pdf/${caseId}`} plugins={[searchPluginInstance]} />
+                        <Viewer fileUrl={`/api/ingest/pdf/${caseId}`} plugins={[searchPluginInstance]} />
                     </Worker>
                 </div>
             </div>

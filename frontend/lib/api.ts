@@ -1,4 +1,4 @@
-const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const BASE = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export const api = {
     uploadJudgment: async (file: File) => {

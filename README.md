@@ -19,6 +19,13 @@ NyayaSetu is a sequential, multi-agent AI platform designed to ingest dense, mul
 
 ## Local Setup & Installation
 
+### Clone the Repository
+
+```bash
+git clone https://github.com/boybothere/nyayasetu-app.git
+cd nyayasetu-app
+```
+
 ### Prerequisites
 
 * Node.js v18 or higher

@@ -24,7 +24,74 @@ NyayaSetu is a sequential, multi-agent AI platform designed to ingest dense, mul
 * Node.js v18 or higher
 * `poppler-utils` installed on your machine (required for `pdftotext` execution)
 
+
+### Installing `poppler-utils`
+
+NyayaSetu relies on the `pdftotext` system binary to extract text from PDFs.
+This is **not installed via npm** and must be installed separately.
+
 ---
+
+### Terminal Compatibility (Important)
+
+NyayaSetu uses the `pdftotext` system utility, so your environment must support it.
+
+#### Recommended Setup (Windows Users)
+
+* Use **WSL (Windows Subsystem for Linux)**
+* Install `poppler-utils` inside WSL
+* Run both backend and frontend using WSL terminal
+
+---
+
+#### Alternative: PowerShell / CMD (Windows)
+
+* Works **only if** Poppler is installed manually on Windows
+* You must:
+
+  * Download Poppler for Windows
+  * Add it to your system `PATH`
+* Otherwise, `pdftotext` will fail
+
+---
+
+#### macOS / Linux
+
+* Works out of the box after installing Poppler
+* You can use any terminal (Terminal, iTerm, etc.)
+
+---
+
+### Recommendation
+
+For the smoothest setup and zero path issues:
+ Use **WSL on Windows** or a **native Linux/macOS environment**
+
+---
+
+
+
+#### Ubuntu / WSL
+
+```bash
+sudo apt update
+sudo apt install poppler-utils
+```
+
+#### macOS (Homebrew)
+
+```bash
+brew install poppler
+```
+
+---
+
+### Verify Installation
+
+```bash
+pdftotext -v
+```
+
 
 ### 1. Booting the Backend
 

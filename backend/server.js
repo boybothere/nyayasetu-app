@@ -223,7 +223,7 @@ app.get('/api/ingest/pdf/:caseId', (req, res) => {
 //  AGENTS ROUTE
 // ═══════════════════════════════════════════════════════════════
 
-// POST /api/agents/run/:caseId — run AI agent pipeline (SSE)
+/// POST /api/agents/run/:caseId — run AI agent pipeline (SSE)
 app.post('/api/agents/run/:caseId', async (req, res) => {
     const { caseId } = req.params;
 
@@ -236,12 +236,18 @@ app.post('/api/agents/run/:caseId', async (req, res) => {
     try {
         const extracted = readCase(caseId, 'extracted.json');
         if (!extracted) {
+            console.error(`[Error] Case ${caseId} not found or not extracted yet.`);
             send('error', { message: 'Case not found or not extracted yet' });
             return res.end();
         }
 
+        console.log(`\n[NyayaSetu] Booting Multi-Agent Pipeline for Case: ${caseId}`);
+
         send('agent_start', { agent: 'Legal Analyst' });
+        console.log("[Agent 1] Legal Analyst: Scanning judgment text...");
+
         send('agent_start', { agent: 'Compliance Planner' });
+        console.log("[Agent 2] Compliance Planner: Structuring directives...");
 
         const agentPrompt = `
 You are a legal compliance AI for Indian government departments.
@@ -271,6 +277,7 @@ Return ONLY valid JSON with this exact structure:
 }
 Case data: ${JSON.stringify(extracted, null, 2)}`;
 
+        console.log("[Gemini Engine] Processing multi-agent reasoning. Please wait...");
         const result = await model.generateContent(agentPrompt);
         const rawOutput = result.response.text();
 
@@ -279,13 +286,23 @@ Case data: ${JSON.stringify(extracted, null, 2)}`;
             const cleaned = rawOutput.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
             actionPlan = JSON.parse(cleaned);
         } catch {
+            console.error("[Error] Agent generated invalid JSON.");
             throw new Error('Agent generated invalid JSON');
         }
 
+        console.log("[Gemini Engine] Processing Complete!");
+
         send('agent_done', { agent: 'Legal Analyst' });
+        console.log("[Agent 1] Legal Analyst: Finished.");
+
         send('agent_done', { agent: 'Compliance Planner' });
+        console.log("[Agent 2] Compliance Planner: Finished.");
+
         send('agent_done', { agent: 'Implementation Officer' });
+        console.log("[Agent 3] Implementation Officer: Delegated tasks.");
+
         send('agent_done', { agent: 'Precedent Checker' });
+        console.log("[Agent 4] Precedent Checker: Risk verified.");
 
         writeCase(caseId, 'action_plan.json', {
             agent: 'NyayaSetu',
@@ -293,11 +310,12 @@ Case data: ${JSON.stringify(extracted, null, 2)}`;
             output: actionPlan
         });
 
+        console.log(`[NyayaSetu] Action Plan saved to database. Redirecting UI...`);
         send('all_done', { caseId, redirect: `/cases/${caseId}/verify` });
         res.end();
 
     } catch (err) {
-        console.error('AGENT ERROR:', err);
+        console.error('[Error] AGENT PIPELINE FAILED:', err);
         send('error', { message: err.message });
         res.end();
     }

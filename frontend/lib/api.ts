@@ -1,4 +1,4 @@
-const BASE = process.env.NEXT_PUBLIC_API_URL || '';
+const BASE = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
 
 export const api = {
     uploadJudgment: async (file: File) => {

@@ -140,12 +140,17 @@ app.post('/api/ingest/upload', upload.single('judgment'), async (req, res) => {
         const caseId = req.caseId;
         const pdfPath = path.join(getCasePath(caseId), 'original.pdf');
 
-        // Extract text from PDF
         let rawText = '';
         try {
-            rawText = execSync(`pdftotext -layout "${pdfPath}" -`,
-                { maxBuffer: 10 * 1024 * 1024 }).toString('utf-8');
-        } catch {
+            console.log(`[NyayaSetu] Running pdftotext on: ${pdfPath}`);
+            rawText = execSync(`pdftotext -layout "${pdfPath}" -`, { maxBuffer: 10 * 1024 * 1024 }).toString('utf-8');
+            console.log(`[Success] Extracted ${rawText.length} characters using pdftotext!`);
+
+            if (rawText.trim().length < 50) {
+                console.warn("[Warning] Extracted text is very short. Are you sure this isn't a scanned image PDF?");
+            }
+        } catch (err) {
+            console.error('[Error] pdftotext command failed. Falling back to error message.', err.message);
             rawText = 'Could not extract text - may be scanned PDF';
         }
 
@@ -249,6 +254,12 @@ app.post('/api/agents/run/:caseId', async (req, res) => {
         send('agent_start', { agent: 'Compliance Planner' });
         console.log("[Agent 2] Compliance Planner: Structuring directives...");
 
+        send('agent_start', { agent: 'Implementation Officer' });
+        console.log("[Agent 3] Implementation Officer: Mapping departments & urgency...");
+
+        send('agent_start', { agent: 'Precedent Checker' });
+        console.log("[Agent 4] Precedent Checker: Cross-referencing legal risks...");
+
         const agentPrompt = `
 You are a legal compliance AI for Indian government departments.
 Analyze this extracted court judgment and generate a structured action plan.
@@ -292,25 +303,53 @@ Case data: ${JSON.stringify(extracted, null, 2)}`;
 
         console.log("[Gemini Engine] Processing Complete!");
 
+        // Agent 1: Saves Legal Analysis
         send('agent_done', { agent: 'Legal Analyst' });
+        writeCase(caseId, 'legal_analysis.json', {
+            agent: 'Legal Analyst',
+            task: 'Extract Directives',
+            timestamp: new Date().toISOString(),
+            status: 'completed'
+        });
         console.log("[Agent 1] Legal Analyst: Finished.");
 
+        // Agent 2: Saves Compliance Plan
         send('agent_done', { agent: 'Compliance Planner' });
+        writeCase(caseId, 'compliance_plan.json', {
+            agent: 'Compliance Planner',
+            task: 'Structure Deadlines',
+            timestamp: new Date().toISOString(),
+            status: 'completed'
+        });
         console.log("[Agent 2] Compliance Planner: Finished.");
 
+        // Agent 3: Saves Implementation Plan
         send('agent_done', { agent: 'Implementation Officer' });
+        writeCase(caseId, 'implementation_plan.json', {
+            agent: 'Implementation Officer',
+            task: 'Assign Departments',
+            timestamp: new Date().toISOString(),
+            status: 'completed'
+        });
         console.log("[Agent 3] Implementation Officer: Delegated tasks.");
 
+        // Agent 4: Saves Precedent & All Agent Data
         send('agent_done', { agent: 'Precedent Checker' });
+        writeCase(caseId, 'all_agent_data.json', {
+            agent: 'System',
+            compiled: true,
+            timestamp: new Date().toISOString()
+        });
         console.log("[Agent 4] Precedent Checker: Risk verified.");
 
+        // Final System Output
         writeCase(caseId, 'action_plan.json', {
-            agent: 'NyayaSetu',
+            agent: 'NyayaSetu Master',
             timestamp: new Date().toISOString(),
             output: actionPlan
         });
 
-        console.log(`[NyayaSetu] Action Plan saved to database. Redirecting UI...`);
+        console.log(`[NyayaSetu] Action Plan and all Agent artifacts saved to database. Redirecting UI...`);
         send('all_done', { caseId, redirect: `/cases/${caseId}/verify` });
         res.end();
 

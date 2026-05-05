@@ -3,8 +3,12 @@ import { UI_DICT, LANGUAGES } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { api } from "@/lib/api";
+
 import { Viewer, Worker } from '@react-pdf-viewer/core';
 import { searchPlugin } from '@react-pdf-viewer/search';
+
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/search/lib/styles/index.css';
 
 export default function VerifyPage() {
     const { caseId } = useParams() as { caseId: string };
@@ -148,9 +152,12 @@ export default function VerifyPage() {
                     <span>Source Document Viewer</span>
                 </div>
 
-                <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
+                <div style={{ height: '750px', width: '100%' }}>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                        <Viewer fileUrl={`{process.env.NEXT_PUBLIC_API_URL}api/ingest/pdf/${caseId}`} plugins={[searchPluginInstance]} />
+                        <Viewer
+                            fileUrl={`${process.env.NEXT_PUBLIC_API_URL || ''}api/ingest/pdf/${caseId}`}
+                            plugins={[searchPluginInstance]}
+                        />
                     </Worker>
                 </div>
             </div>

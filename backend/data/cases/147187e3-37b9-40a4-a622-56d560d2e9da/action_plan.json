@@ -1,0 +1,31 @@
+{
+  "agent": "NyayaSetu",
+  "timestamp": "2026-05-05T16:11:44.453Z",
+  "output": {
+    "action_items": [
+      {
+        "directive_id": "D1",
+        "source_quote": "The High Court dismissed the criminal appeal filed by the appellant challenging the conviction and sentence for offenses including kidnapping, rape, and murder of a minor.",
+        "plain_language": "The criminal appeal filed by Gilakalagiri has been dismissed by the High Court, upholding the conviction and sentence for offenses related to kidnapping, rape, and murder of a minor.",
+        "hindi_summary": "उच्च न्यायालय ने नाबालिग के अपहरण, बलात्कार और हत्या के आरोपों में दोषी ठहराए गए गिलाकलगी की आपराधिक अपील खारिज कर दी।",
+        "responsible_department": "Police Department",
+        "responsible_officer": "Director General of Police",
+        "comply_deadline": "2026-07-30",
+        "appeal_deadline": "None explicitly stated",
+        "urgency": "high",
+        "urgency_reasoning": "The judgment upholds a conviction for serious offenses including murder, requiring immediate confirmation of compliance and any necessary follow-up actions.",
+        "action_type": "comply",
+        "steps": [
+          "Confirm that the appellant, Gilakalagiri, is undergoing the sentence as per the court's order.",
+          "Ensure all records related to the conviction and sentencing are updated to reflect the High Court's dismissal of the appeal.",
+          "Verify that no further legal actions or appeals are pending from the appellant's side at this stage.",
+          "Prepare a compliance report for internal records."
+        ],
+        "confidence_score": 0.95,
+        "penalty_for_non_compliance": "None explicitly stated, but failure to comply with court orders can lead to contempt of court proceedings."
+      }
+    ],
+    "overall_risk": "low",
+    "case_summary": "The High Court of Andhra Pradesh dismissed a criminal appeal against a conviction for kidnapping, rape, and murder of a minor. The court found the prosecution's evidence, including circumstantial and forensic evidence, sufficient to prove guilt beyond reasonable doubt."
+  }
+}

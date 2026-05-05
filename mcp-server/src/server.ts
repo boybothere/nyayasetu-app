@@ -5,21 +5,18 @@ import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'fs';
 import * as path from 'path';
 
-// ==========================================
 // CONFIG & MOCK TOGGLE
-// ==========================================
-const USE_MOCK = process.env.USE_MOCK !== 'false'; // Defaults to true
+const USE_MOCK = process.env.USE_MOCK !== 'false';
 const KANOON_API_KEY = process.env.KANOON_API_KEY;
 
-// Placeholder for Kanoon SDK (you will import this when you get the key)
+
 let kanoon: any = null;
 if (!USE_MOCK && KANOON_API_KEY) {
     // import { Kanoon } from "kanoon";
     // kanoon = new Kanoon({ apiKey: KANOON_API_KEY });
-    console.error("Live mode requires kanoon SDK to be installed and uncommented.");
+    console.error("Live mode requires kanoon SDK to be installed and uncommented");
 }
 
-// Storage paths for NyayaSetu
 const STORAGE_DIR = path.join(process.cwd(), 'data', 'cases');
 if (!fs.existsSync(STORAGE_DIR)) fs.mkdirSync(STORAGE_DIR, { recursive: true });
 
@@ -28,9 +25,7 @@ const server = new McpServer({
     version: "1.0.0",
 });
 
-// ==========================================
 // TOOL 1: fetch_disposed_cases
-// ==========================================
 server.tool(
     "fetch_disposed_cases",
     "Find recently disposed cases where the government is the respondent.",
@@ -67,7 +62,6 @@ server.tool(
             };
         }
 
-        // LIVE MODE (Kanoon API)
         const result = await kanoon.search.cases(
             `court_id:"${court_id}" party_composition.respondent:government`,
             { limit, order: "desc" }
@@ -90,9 +84,7 @@ server.tool(
     }
 );
 
-// ==========================================
 // TOOL 2: fetch_judgment_pdf
-// ==========================================
 server.tool(
     "fetch_judgment_pdf",
     "Download PDF and extract Kanoon insights (notes, outcome) for analysis.",
@@ -111,7 +103,6 @@ server.tool(
         };
 
         if (USE_MOCK) {
-            // Mock PDF copy
             const demoPdfPath = path.join(process.cwd(), 'public', 'demo.pdf');
             if (fs.existsSync(demoPdfPath)) {
                 fs.copyFileSync(demoPdfPath, path.join(caseDir, 'document.pdf'));
@@ -119,7 +110,6 @@ server.tool(
             extractedData.outcome = "allowed";
             extractedData.order_notes = ["The Writ Petition is allowed.", "No order as to costs."];
         } else {
-            // LIVE MODE
             const [caseDetails, insights, orders] = await Promise.all([
                 kanoon.courts.cases.retrieve(court_id, case_id),
                 kanoon.courts.cases.insights.list(court_id, case_id),
@@ -128,7 +118,7 @@ server.tool(
 
             const latestOrder = orders.data?.find((o: any) => o.url);
             if (latestOrder) {
-                // Here you would implement standard fetch to download the PDF to caseDir/document.pdf
+                // Implement standard fetch to download the PDF to caseDir/document.pdf
                 // await downloadFile(latestOrder.url, path.join(caseDir, 'document.pdf'));
             }
 
@@ -156,9 +146,7 @@ server.tool(
     }
 );
 
-// ==========================================
 // TOOL 3: update_compliance_status
-// ==========================================
 server.tool(
     "update_compliance_status",
     "Update the CCMS system with verified directives and deadlines.",
@@ -184,9 +172,7 @@ server.tool(
     }
 );
 
-// ==========================================
 // TOOL 4: get_case_summary
-// ==========================================
 server.tool(
     "get_case_summary",
     "Retrieve the current processing state and details of a NyayaSetu case.",
@@ -208,9 +194,7 @@ server.tool(
     }
 );
 
-// ==========================================
 // TOOL 5: get_case_events
-// ==========================================
 server.tool(
     "get_case_events",
     "Get hearing history and upcoming dates for a case (useful post-appeal).",
@@ -248,9 +232,7 @@ server.tool(
     }
 );
 
-// ==========================================
 // START SERVER
-// ==========================================
 async function main() {
     console.log(`Starting NyayaSetu MCP Server (MOCK MODE: ${USE_MOCK})`);
     const transport = new StdioServerTransport();

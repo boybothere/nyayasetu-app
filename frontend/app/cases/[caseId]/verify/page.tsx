@@ -16,9 +16,8 @@ export default function VerifyPage() {
     const [isLocked, setIsLocked] = useState(false);
     const [rejectModal, setRejectModal] = useState({ show: false, directiveId: '', reason: '' });
 
-    // 2. THE LANGUAGE STATE
     const [lang, setLang] = useState<'en' | 'hi' | 'mr'>('en');
-    const t = UI_DICT[lang]; // Pulls the correct language dynamically
+    const t = UI_DICT[lang];
 
     const searchPluginInstance = searchPlugin();
     const { highlight } = searchPluginInstance;
@@ -59,10 +58,8 @@ export default function VerifyPage() {
     return (
         <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', backgroundColor: '#f8fafc', color: '#0f172a', fontFamily: 'sans-serif' }}>
 
-            {/* LEFT SIDE: Review Panel */}
             <div style={{ width: '50vw', flexShrink: 0, overflowY: 'auto', padding: '2rem', position: 'relative' }}>
 
-                {/* TOP BAR: Back Button + Language Dropdown */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                     <button onClick={() => router.push(`/cases/${caseId}/dashboard`)} style={{ padding: '0.5rem 1rem', backgroundColor: '#e2e8f0', color: 'black', border: 'none', borderRadius: '0.25rem', fontWeight: 600, cursor: 'pointer' }}>
                         {t.back}
@@ -86,7 +83,7 @@ export default function VerifyPage() {
 
                 {isLocked && (
                     <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', padding: '1rem', borderRadius: '0.25rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <span style={{ fontSize: '1.25rem' }}>🔒</span>
+                        <span style={{ fontSize: '1.25rem' }}></span>
                         <p style={{ fontSize: '0.875rem', fontWeight: 700, color: '#16a34a', margin: 0 }}>
                             {t.lockedMsg}
                         </p>
@@ -109,7 +106,6 @@ export default function VerifyPage() {
                             </span>
                         </div>
 
-                        {/* 3. DYNAMIC TRANSLATION FOR THE AI VERDICT */}
                         <p style={{ fontSize: '0.95rem', fontWeight: 500, color: '#0f172a', lineHeight: '1.5', marginBottom: '1rem' }}>
                             {lang === 'en' ? item.plain_language :
                                 lang === 'hi' ? (item.hindi_translation || item.plain_language) :
@@ -147,13 +143,11 @@ export default function VerifyPage() {
                 )}
             </div>
 
-            {/* RIGHT SIDE: PDF */}
             <div style={{ width: '50vw', backgroundColor: '#f1f5f9', borderLeft: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
                 <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid #cbd5e1', backgroundColor: 'white', color: '#334155', fontWeight: 600, fontSize: '0.8rem', display: 'flex', justifyContent: 'space-between' }}>
                     <span>Source Document Viewer</span>
                 </div>
 
-                {/* THE FIX: overflowY: 'auto' and minHeight: 0 lets the PDF scroll! */}
                 <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
                         <Viewer fileUrl={`http://localhost:3001/api/ingest/pdf/${caseId}`} plugins={[searchPluginInstance]} />
@@ -161,7 +155,6 @@ export default function VerifyPage() {
                 </div>
             </div>
 
-            {/* REJECTION REASON MODAL */}
             {rejectModal.show && (
                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(15, 23, 42, 0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
                     <div style={{ backgroundColor: 'white', borderRadius: '0.5rem', padding: '2rem', width: '100%', maxWidth: '450px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>

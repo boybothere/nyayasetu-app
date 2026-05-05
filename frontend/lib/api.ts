@@ -9,7 +9,6 @@ export const api = {
     },
 
     runAgents: (caseId: string, onEvent: (e: string, d: any) => void) => {
-        // We strictly use fetch POST with a ReadableStream for SSE here to prevent GET errors
         return fetch(`${BASE}/agents/run/${caseId}`, { method: 'POST' })
             .then(res => {
                 const reader = res.body!.getReader();
@@ -41,9 +40,8 @@ export const api = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         }).then(r => r.json()),
-    // Add this inside your exported api object
     getExistingDecisions: async (caseId: string) => {
-        const res = await fetch(`${BASE}/verify/${caseId}/decisions`); // Changed BASE_URL to BASE
+        const res = await fetch(`${BASE}/verify/${caseId}/decisions`);
         if (!res.ok) return { items: [] };
         return res.json();
     },

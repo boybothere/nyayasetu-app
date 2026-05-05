@@ -2,7 +2,7 @@ import { BaseAgent } from "./baseAgent";
 
 export class PrecedentChecker extends BaseAgent {
   name = "Precedent Checker";
-  outputFile = "action_plan.json";   // This is the FINAL merged output
+  outputFile = "action_plan.json";
   systemPrompt = `
 You are a senior legal advisor with deep knowledge of Indian court precedents.
 You will receive the complete analysis of a court judgment across all agents.

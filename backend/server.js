@@ -11,20 +11,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Initialize Gemini (Make sure GEMINI_API_KEY is in your .env file)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// ==========================================
-// 1. SETUP MCP CLIENT
-// ==========================================
-// This points to the mcp-server folder you just built!
 const transport = new StdioClientTransport({
     command: "npx",
-    // Adjust this path if your mcp-server is located differently relative to this backend folder
     args: ["tsx", "../mcp-server/src/server.ts"],
     env: {
         ...process.env,
-        USE_MOCK: "true" // Forcing mock mode for the hackathon demo
+        USE_MOCK: "true" // prototype demo
     }
 });
 
@@ -33,30 +27,27 @@ const mcpClient = new Client({ name: "nyayasetu-backend", version: "1.0.0" }, { 
 async function connectMCP() {
     try {
         await mcpClient.connect(transport);
-        console.log("✅ Backend successfully connected to MCP Server!");
+        console.log("Backend successfully connected to MCP Server!");
     } catch (err) {
-        console.error("❌ Failed to connect to MCP Server:", err);
+        console.error("Failed to connect to MCP Server:", err);
     }
 }
 connectMCP();
 
-// ==========================================
-// 2. THE AI ANALYSIS ROUTE
-// ==========================================
 app.post('/api/analyze-cases', async (req, res) => {
     try {
-        console.log("🚀 Incoming request: Fetching cases via MCP...");
+        console.log("Incoming request: Fetching cases via MCP...");
 
-        // A. Call the MCP Tool
+        // Call the MCP Tool
         const mcpResult = await mcpClient.callTool({
             name: "fetch_disposed_cases",
             arguments: { court_id: "BHC-GOA", limit: 3 }
         });
 
         const caseDataStr = mcpResult.content[0].text;
-        console.log("📄 Retrieved Case Data from MCP");
+        console.log("Retrieved Case Data from MCP");
 
-        // B. Formulate the strict prompt for Gemini
+        // Formulate the strict prompt for Gemini
         const prompt = `
             You are an elite Government Legal Compliance AI. 
             Review the following court cases retrieved via our MCP database tool.
@@ -86,18 +77,17 @@ app.post('/api/analyze-cases', async (req, res) => {
             }
         `;
 
-        console.log("🧠 Sending data to Gemini 1.5 Flash...");
+        console.log("Sending data to Gemini...");
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
         const aiResult = await model.generateContent(prompt);
         let rawText = aiResult.response.text();
 
-        // Clean up markdown code blocks if Gemini returns them
         rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
 
         const finalJson = JSON.parse(rawText);
-        console.log("✅ Gemini Analysis Complete!");
+        console.log("Gemini Analysis Complete!");
 
-        // C. Send to Frontend
+        // Send to Frontend
         res.json({
             success: true,
             analysis: finalJson,
@@ -105,13 +95,13 @@ app.post('/api/analyze-cases', async (req, res) => {
         });
 
     } catch (error) {
-        console.error("❌ Error in /api/analyze-cases:", error);
+        console.error("Error in /api/analyze-cases:", error);
         res.status(500).json({ error: "Failed to process cases", details: error.message });
     }
 });
 
-// Start the Backend
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log(`\n🚀 NyayaSetu Backend API running on http://localhost:${PORT}`);
+    console.log(`\nNyayaSetu Backend API running on http://localhost:${PORT}`);
 });

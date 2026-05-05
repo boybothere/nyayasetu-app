@@ -3,7 +3,7 @@ import { readCaseFile, listCases } from "../core/caseStore";
 
 const router = express.Router();
 
-// GET /api/dashboard — list all cases with verified status
+// GET /api/dashboard — list all cases 
 router.get("/", (_, res) => {
     const cases = listCases().map(caseId => {
         const extracted = readCaseFile<any>(caseId, 'extracted.json');
@@ -28,8 +28,6 @@ router.get("/:caseId", (req, res) => {
     const plan = readCaseFile<any>(caseId, 'action_plan.json');
     const verified = readCaseFile<any>(caseId, 'verified.json');
     const extracted = readCaseFile<any>(caseId, 'extracted.json');
-
-    // BULLETPROOF FIX: Return a "pending" status instead of crashing with a 403
     if (!verified?.allApproved) {
         return res.json({ status: 'pending_verification', caseId, extracted });
     }

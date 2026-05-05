@@ -9,7 +9,6 @@ import fs from "fs";
 
 const router = express.Router();
 
-// Setup multer for PDF uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const caseId = uuidv4();
@@ -24,10 +23,8 @@ const upload = multer({ storage });
 
 // POST /api/ingest/webhook — simulates CCMS calling NyayaSetu
 router.post("/webhook", express.json(), async (req, res) => {
-    // CCMS would send: { case_number, court, judgment_url }
     const { case_number, judgment_url } = req.body;
 
-    // For demo: Just acknowledge receipt
     res.json({
         success: true,
         message: 'Judgment received from Government CCMS API',
@@ -41,11 +38,7 @@ router.post("/upload", upload.single("judgment"), async (req, res) => {
     try {
         const caseId = (req as any).caseId;
         const pdfPath = path.join(getCasePath(caseId), 'original.pdf');
-
-        // Step 1: Extract raw text
         const rawText = extractTextFromPDF(pdfPath);
-
-        // Step 2: Use Gemini to extract structured data
         const extractionPrompt = `
 You are a legal document analyst for Indian High Court judgments.
 Extract the following from this judgment text and return ONLY valid JSON:
@@ -69,14 +62,10 @@ Extract the following from this judgment text and return ONLY valid JSON:
   "raw_summary": "2-3 sentence summary of the judgment"
 }
 Judgment text:\n\n${rawText}`;
-        // (Truncate to 30k chars to stay within token limits)
-
-        // THE BULLETPROOF PARSER
         const rawOutput = await callGemini('', extractionPrompt, true);
 
         let extracted;
         try {
-            // Vacuum up any accidental markdown blocks the AI added
             const cleanedOutput = rawOutput.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
             extracted = JSON.parse(cleanedOutput);
         } catch (parseError) {
@@ -99,7 +88,7 @@ Judgment text:\n\n${rawText}`;
     }
 });
 
-// Added this snippet here as recommended by the guide for the frontend PDF viewer
+// frontend PDF viewer
 router.get('/pdf/:caseId', (req, res) => {
     res.sendFile(path.resolve(getCasePath(req.params.caseId), 'original.pdf'));
 });

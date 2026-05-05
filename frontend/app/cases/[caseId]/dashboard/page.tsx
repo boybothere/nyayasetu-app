@@ -4,7 +4,6 @@ import { useParams } from "next/navigation";
 import { api } from "@/lib/api";
 import { LANGUAGES } from "@/lib/i18n";
 
-// Updated Dictionary with Rejection terms
 const DASH_DICT: Record<string, any> = {
     en: { title: "NyayaSetu Compliance Dashboard", case: "Case Number", court: "Court", date: "Order Date", days: "15 days left", officer: "Officer:", deadline: "Deadline:", orig: "Official English Record", rejectedBadge: "REJECTED BY REVIEWER", reason: "Reason for Rejection:" },
     hi: { title: "न्यायसेतु अनुपालन डैशबोर्ड", case: "केस नंबर", court: "न्यायालय", date: "आदेश तिथि", days: "15 दिन शेष", officer: "अधिकारी:", deadline: "समय सीमा:", orig: "आधिकारिक अंग्रेजी रिकॉर्ड", rejectedBadge: "समीक्षक द्वारा अस्वीकृत", reason: "अस्वीकार करने का कारण:" },
@@ -32,7 +31,6 @@ export default function PublishedDashboard() {
             .then(([planData, decisionsData]) => {
                 setPlan(planData);
 
-                // Map decisions so we can easily look up status and reason
                 if (decisionsData?.items) {
                     const decMap: Record<string, any> = {};
                     decisionsData.items.forEach((item: any) => {
@@ -94,7 +92,7 @@ export default function PublishedDashboard() {
                     </div>
                 </div>
 
-                {/* DEPARTMENT SECTIONS */}
+
                 {Object.entries(groupedItems).map(([dept, deptItems]: [string, any]) => (
                     <div key={dept} style={{ border: '1px solid #e2e8f0', borderRadius: '0.5rem', padding: '1.5rem', marginBottom: '2rem' }}>
                         <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
@@ -115,7 +113,6 @@ export default function PublishedDashboard() {
                                             {translatedText}
                                         </p>
 
-                                        {/* Dynamic Badge: Approved gets '15 days', Rejected gets 'REJECTED' */}
                                         {isRejected ? (
                                             <span style={{ backgroundColor: '#fef2f2', color: '#b91c1c', border: '1px solid #fecaca', padding: '0.35rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem', fontWeight: 800, whiteSpace: 'nowrap' }}>
                                                 {t.rejectedBadge}
@@ -127,7 +124,6 @@ export default function PublishedDashboard() {
                                         )}
                                     </div>
 
-                                    {/* Conditional Render: Show Reason if Rejected, Show Deadlines if Approved */}
                                     {isRejected ? (
                                         <div style={{ backgroundColor: '#fef2f2', borderLeft: '4px solid #ef4444', padding: '1rem', borderRadius: '0 0.25rem 0.25rem 0', marginBottom: '1rem' }}>
                                             <p style={{ fontSize: '0.75rem', fontWeight: 800, color: '#991b1b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>
@@ -148,7 +144,6 @@ export default function PublishedDashboard() {
                                         </div>
                                     )}
 
-                                    {/* English Fallback for Translations */}
                                     {lang !== 'en' && !isRejected && (
                                         <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '0.25rem', padding: '0.75rem' }}>
                                             <p style={{ fontSize: '0.65rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>

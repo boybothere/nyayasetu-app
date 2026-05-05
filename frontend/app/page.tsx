@@ -14,7 +14,6 @@ export default function Home() {
     if (!file) return;
     setStage('extracting');
 
-    // Step 1: Upload + extract
     const { caseId: id } = await api.uploadJudgment(file);
     setCaseId(id);
     setStage('agents');
@@ -27,8 +26,8 @@ export default function Home() {
       setStage('agents');
 
       await api.runAgents(id, (event, data) => {
-        if (event === 'agent_start') setAgentLog(l => [...l, `⏳ ${data.agent} working...`]);
-        if (event === 'agent_done') setAgentLog(l => [...l, `✅ ${data.agent} done`]);
+        if (event === 'agent_start') setAgentLog(l => [...l, `${data.agent} working...`]);
+        if (event === 'agent_done') setAgentLog(l => [...l, `${data.agent} done`]);
         if (event === 'all_done') {
           setStage('done');
           setTimeout(() => router.push(`/cases/${id}/verify`), 1000);

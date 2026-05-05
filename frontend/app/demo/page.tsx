@@ -8,7 +8,6 @@ export default function ComplianceCommandCenter() {
     const runAIAgent = async () => {
         setLoading(true);
         try {
-            // Hitting your Express Backend!
             const res = await fetch("http://localhost:3001/api/analyze-cases", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -31,7 +30,6 @@ export default function ComplianceCommandCenter() {
         <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'sans-serif', padding: '3rem', color: '#0f172a' }}>
             <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
 
-                {/* Header Section */}
                 <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                     <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#1e3a8a', marginBottom: '1rem' }}>
                         NyayaSetu Command Center
@@ -60,11 +58,8 @@ export default function ComplianceCommandCenter() {
                     </button>
                 </div>
 
-                {/* Results Section */}
                 {data && (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-
-                        {/* THE AI DIRECTIVES */}
                         <div>
                             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', marginBottom: '1.5rem' }}>
                                 Extracted Action Items
@@ -99,7 +94,6 @@ export default function ComplianceCommandCenter() {
                             ))}
                         </div>
 
-                        {/* BEHIND THE SCENES: Raw MCP Data */}
                         <div style={{ marginTop: '2rem' }}>
                             <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1rem' }}>
                                 🔍 Behind the Scenes: Raw MCP Database Hits

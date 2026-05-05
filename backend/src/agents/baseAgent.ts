@@ -14,7 +14,6 @@ export abstract class BaseAgent {
 
         const userMessage = `Here is the case data to analyse:\n\n${JSON.stringify(input, null, 2)}`;
 
-        // Notice we are passing jsonMode = true to our upgraded Gemini client
         const rawOutput = await callGemini(this.systemPrompt, userMessage, true);
 
         let parsed;

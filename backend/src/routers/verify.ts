@@ -10,15 +10,6 @@ router.get("/:caseId", (req, res) => {
     res.json(plan);
 });
 
-router.get("/:caseId/decisions", (req, res) => {
-    try {
-        const verified = readCaseFile(req.params.caseId, "verified.json");
-        res.json(verified || { items: [], isLocked: false });
-    } catch (error) {
-        res.json({ items: [], isLocked: false });
-    }
-});
-
 // POST /api/verify/:caseId/item — approve/edit/reject one item
 router.post("/:caseId/item", (req, res) => {
     const { caseId } = req.params;
@@ -27,7 +18,6 @@ router.post("/:caseId/item", (req, res) => {
 
     let verified = readCaseFile<any>(caseId, 'verified.json') || { items: [], allApproved: false };
 
-    // Remove existing decision for this directive if re-reviewing
     verified.items = verified.items.filter((i: any) => i.directive_id !== directive_id);
 
     verified.items.push({

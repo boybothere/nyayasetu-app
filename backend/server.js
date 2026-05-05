@@ -49,40 +49,41 @@ app.post('/api/analyze-cases', async (req, res) => {
 
         // Formulate the strict prompt for Gemini
         const prompt = `
-            You are an elite Government Legal Compliance AI. 
-            Review the following court cases retrieved via our MCP database tool.
-            
-            COURT CASES JSON:
-            ${caseDataStr}
-            
-            INSTRUCTIONS:
-            1. ONLY look at cases where the "outcome" is "allowed" (meaning the government lost and must take action). Ignore "dismissed" cases entirely.
-            2. For the "allowed" cases, extract the actionable directives for the government.
-            3. You MUST output your response as a valid JSON object matching the exact schema below. Do not include markdown formatting or backticks outside of the JSON.
+You are an elite Legal Compliance AI Agent for the Goa Government. 
+Analyze the following raw court data:
 
-            EXPECTED JSON SCHEMA:
-            {
-                "output": {
-                    "action_items": [
-                        {
-                            "directive_id": "D1",
-                            "source_quote": "[Extract the exact sentence from the outcome_reason]",
-                            "plain_language": "[Translate the legal action into plain English]",
-                            "responsible_department": "[Infer the specific Goa government department, e.g., 'Labour Department', 'GCZMA']",
-                            "comply_deadline": "[Extract the deadline in YYYY-MM-DD format based on today's date, or 'Immediate']",
-                            "urgency": "[high, medium, or low]"
-                        }
-                    ]
-                }
-            }
-        `;
+${caseDataStr}
+
+DO NOT just summarize the first thing you see. You must perform the following multi-step investigation:
+1. Filter the cases: ONLY process cases where the outcome is "allowed_against_government". Ignore dismissed cases.
+2. Extract details: For each valid case, extract the 'financial_penalty_inr' and the 'associated_departments'.
+3. Determine urgency: If the financial penalty is greater than 0, set the urgency to "CRITICAL_FINANCIAL_RISK". Otherwise, set it to "high".
+
+You MUST return ONLY a valid JSON object with the following exact structure:
+{
+  "output": {
+    "action_items": [
+      {
+        "directive_id": "D1",
+        "plain_language": "Clearly explain what the government needs to do based on the judgment_text",
+        "responsible_department": "Name of the departments",
+        "comply_deadline": "Extract deadline if any, otherwise 'Immediate'",
+        "urgency": "CRITICAL_FINANCIAL_RISK or high"
+      }
+    ]
+  }
+}
+`;
 
         console.log("Sending data to Gemini...");
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
-        const aiResult = await model.generateContent(prompt);
-        let rawText = aiResult.response.text();
 
-        rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+        const model = genAI.getGenerativeModel({
+            model: "gemini-2.5-flash-lite",
+            generationConfig: { responseMimeType: "application/json" }
+        });
+
+        const aiResult = await model.generateContent(prompt);
+        const rawText = aiResult.response.text();
 
         const finalJson = JSON.parse(rawText);
         console.log("Gemini Analysis Complete!");

@@ -1,8 +1,8 @@
+import fs from 'fs';
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { v4 as uuidv4 } from 'uuid';
-import * as fs from 'fs';
 import * as path from 'path';
 
 // CONFIG & MOCK TOGGLE
@@ -32,33 +32,9 @@ server.tool(
     { court_id: z.string(), limit: z.number().optional().default(5) },
     async ({ court_id, limit }) => {
         if (USE_MOCK) {
+            const rawData = fs.readFileSync('../mcp-server/src/database.json', 'utf-8');
             return {
-                content: [{
-                    type: "text",
-                    text: JSON.stringify([
-                        {
-                            id: "bhc-goa-wp-1042-2025",
-                            case_number: "WP/1042/2025",
-                            outcome: "allowed",
-                            outcome_reason: "The State Government is directed to clear all pending provident fund and retirement dues for Kadamba Transport Corporation employees within 30 days.",
-                            respondent: "State of Goa & Kadamba Transport Corporation"
-                        },
-                        {
-                            id: "bhc-goa-pil-45-2024",
-                            case_number: "PIL/45/2024",
-                            outcome: "allowed",
-                            outcome_reason: "The court finds severe Coastal Regulation Zone (CRZ) violations. The Goa Coastal Zone Management Authority (GCZMA) and North Goa District Collector are ordered to demolish the illegal structures at Morjim beach and submit a compliance report within 15 days.",
-                            respondent: "GCZMA & State Government"
-                        },
-                        {
-                            id: "bhc-goa-wp-2099-2025",
-                            case_number: "WP/2099/2025",
-                            outcome: "dismissed",
-                            outcome_reason: "The petition filed by the private contractor is devoid of merit. The Public Works Department's (PWD) decision to terminate the highway tender was lawful and is upheld.",
-                            respondent: "Public Works Department, Goa"
-                        }
-                    ], null, 2)
-                }]
+                content: [{ type: "text", text: rawData }]
             };
         }
 

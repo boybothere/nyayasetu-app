@@ -1,0 +1,17 @@
+[
+    {
+        "case_id": "BHC-GOA-WP-1042-2025",
+        "status": "allowed_against_government",
+        "raw_judgment_text": "Upon hearing the arguments, it is clear the State has failed to fulfill its statutory obligations. The Court directs the Kadamba Transport Corporation and the State Finance Department to immediately clear the pending provident fund dues of the workers. Furthermore, a penalty of Rs. 45,00,000/- (Rupees Forty-Five Lakhs) is imposed on the State for this delay. The Chief Secretary is directed to ensure compliance within 30 days of this order."
+    },
+    {
+        "case_id": "BHC-GOA-PIL-45-2024",
+        "status": "allowed_against_government",
+        "raw_judgment_text": "The blatant violation of Coastal Regulation Zone (CRZ) norms cannot be ignored. We hereby issue a writ of mandamus directing the Goa Coastal Zone Management Authority (GCZMA) and the North Goa District Collector to demolish the illegal concrete structures erected on Morjim beach. A compliance report must be filed before this court within 15 days. No financial penalty is levied at this stage."
+    },
+    {
+        "case_id": "BHC-GOA-WP-2099-2025",
+        "status": "dismissed",
+        "raw_judgment_text": "The petition filed by Ramesh Builders challenging the tender cancellation by the Public Works Department (PWD) is devoid of merit. The PWD acted within its administrative rights. The petition is hereby dismissed. No costs."
+    }
+]

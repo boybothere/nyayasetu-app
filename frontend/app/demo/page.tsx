@@ -8,7 +8,7 @@ export default function ComplianceCommandCenter() {
     const runAIAgent = async () => {
         setLoading(true);
         try {
-            const res = await fetch("/api/analyze-cases", {
+            const res = await fetch("http://localhost:3001/api/analyze-cases", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ courtId: "BHC-GOA" })

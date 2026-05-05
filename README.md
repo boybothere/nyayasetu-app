@@ -13,9 +13,9 @@ NyayaSetu is a sequential, multi-agent AI platform designed to ingest dense, mul
 
 ## Architecture Stack
 
-* **Frontend:** Next.js, React, Tailwind CSS, `@react-pdf-viewer`
-* **Backend:** Node.js, Express, `pdftotext` integration
-* **AI Engine:** Gemini AI API (Multi-Agent sequential prompting)
+*   **Frontend:** Next.js, React, Tailwind CSS, `@react-pdf-viewer`
+*   **Backend:** Node.js, Express, `pdftotext` integration
+*   **AI Engine & Orchestration:** Gemini AI API, **Model Context Protocol (MCP)**, Sequential BaseAgents
 
 ## Local Setup & Installation
 

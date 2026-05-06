@@ -1,0 +1,49 @@
+{
+  "caseId": "8f041c63-29ee-4adb-9a83-13cbe799714e",
+  "uploadedAt": "2026-05-06T06:41:28.330Z",
+  "case_number": "WRIT PETITION NO.15779 OF 2025",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "Giri Textiles, through Proprietor Chandrayya R. Pasnuri",
+  "respondent": "Anthony Nadar and Jainam Silk Mills",
+  "government_department_involved": "Labour Court, Thane and Industrial Court, Thane",
+  "directives": [
+    {
+      "id": "D1",
+      "text": "Register the High Court order in the relevant case file.",
+      "deadline_text": "Upon receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Forward the High Court's order to the Labour Court, Thane for further proceedings in Application (BIR) No. 1 of 2014.",
+      "deadline_text": "Upon receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "Ensure the Labour Court, Thane initiates proceedings for Application (BIR) No. 1 of 2014, as directed by the High Court.",
+      "deadline_text": "Within 6 months from receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "The Labour Court, Thane to decide Application (BIR) No. 1 of 2014 on its merits, without being influenced by previous observations, except for the concluded issue.",
+      "deadline_text": "Within 6 months from receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D5",
+      "text": "Monitor the progress of Application (BIR) No. 1 of 2014 to ensure it is decided within the stipulated six-month period.",
+      "deadline_text": "Ongoing, with target of 6 months",
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": 90,
+  "raw_summary": "The High Court dismissed the writ petition, upholding the orders of the Labour Court and Industrial Court. The court held that the objection regarding non-maintainability of the application due to alleged non-compliance with Section 42(4) of the Maharashtra Industrial Relations Act, 1946, did not merit acceptance. The Labour Court was directed to proceed with Application (BIR) No. 1 of 2014 and decide it on merits preferably within six months."
+}

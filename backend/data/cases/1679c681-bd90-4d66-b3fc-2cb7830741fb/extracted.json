@@ -1,0 +1,49 @@
+{
+  "caseId": "1679c681-bd90-4d66-b3fc-2cb7830741fb",
+  "uploadedAt": "2026-05-06T06:41:17.815Z",
+  "case_number": "WRIT PETITION NO.15779 OF 2025",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "Giri Textiles, through Proprietor Chandrayya R. Pasnuri",
+  "respondent": "Anthony Nadar and Jainam Silk Mills",
+  "government_department_involved": "Labour Court, Thane; Industrial Court, Thane; Labour Office",
+  "directives": [
+    {
+      "id": "D1",
+      "text": "Register the High Court's order dismissing the writ petition.",
+      "deadline_text": "Upon receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Forward the High Court's order to the Labour Court, Thane for further proceedings in Application (BIR) No. 1 of 2014.",
+      "deadline_text": "Upon receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "Ensure the Labour Court, Thane proceeds with Application (BIR) No. 1 of 2014 on merits, uninfluenced by previous observations, except for the concluded issue on non-compliance with Section 42(4) of the Maharashtra Industrial Relations Act, 1946.",
+      "deadline_text": "Ongoing",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "Ensure the Labour Court, Thane disposes of Application (BIR) No. 1 of 2014 within six months from the date of receipt of the High Court's order.",
+      "deadline_text": "Within six months from receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D5",
+      "text": "File a compliance report with the High Court regarding the disposal of Application (BIR) No. 1 of 2014 within the stipulated period.",
+      "deadline_text": "Upon disposal",
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": 90,
+  "raw_summary": "The High Court dismissed the writ petition, upholding the orders of the Labour Court and Industrial Court. The petitioner's objection regarding non-maintainability of the application due to non-compliance with Section 42(4) of the Maharashtra Industrial Relations Act, 1946 was rejected. The Labour Court was directed to proceed with the application and decide it on its merits, preferably within six months."
+}

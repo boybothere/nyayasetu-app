@@ -1,0 +1,56 @@
+{
+  "caseId": "9eaceb1f-c13d-49d4-a81b-d71ac2ff3f07",
+  "uploadedAt": "2026-05-06T06:50:54.982Z",
+  "case_number": "WRIT PETITION NO.15779 OF 2025",
+  "date_of_order": "2026-04-30",
+  "court_name": "High Court of Judicature at Bombay",
+  "petitioner": "Giri Textiles, through Proprietor Chandrayya R. Pasnuri",
+  "respondent": "Anthony Nadar and Jainam Silk Mills",
+  "government_department_involved": "Labour Court, Thane",
+  "directives": [
+    {
+      "id": "D1",
+      "text": "Register and officially acknowledge the receipt of the High Court's order dated 30 April 2026 for Writ Petition No. 15779 of 2025 within the Labour Court, Thane records.",
+      "deadline_text": "Immediately upon receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Update the case status of Application (BIR) No. 1 of 2014 in the Labour Court, Thane, affirming its maintainability and reflecting the High Court's directive to proceed with the case on its merits.",
+      "deadline_text": "Within 7 days of order receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "Schedule the next hearing and all subsequent proceedings for Application (BIR) No. 1 of 2014 to ensure the case progresses expeditiously towards final disposal.",
+      "deadline_text": "Within 15 days of order receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "Conduct all necessary judicial proceedings for Application (BIR) No. 1 of 2014, including the recording of evidence and hearing of arguments, ensuring the case is decided strictly on its merits.",
+      "deadline_text": "To be completed within the overall 6-month disposal period",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D5",
+      "text": "Ensure the final judgment for Application (BIR) No. 1 of 2014 is pronounced and the application is disposed of by the Labour Court, Thane, within six months from the date of receipt of this High Court order.",
+      "deadline_text": "Within six months from the date of receipt of High Court order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D6",
+      "text": "Implement and maintain an internal tracking mechanism to monitor the progress of Application (BIR) No. 1 of 2014 and ensure strict adherence to the six-month disposal deadline set by the High Court.",
+      "deadline_text": "Ongoing until disposal",
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": 180,
+  "raw_summary": "The High Court dismissed the writ petition filed by Giri Textiles, thereby upholding the orders of the Labour Court and Industrial Court. The petitioner's objection regarding the non-maintainability of Application (BIR) No. 1 of 2014 due to alleged non-compliance with Section 42(4) of the Maharashtra Industrial Relations Act, 1946, was rejected. The Labour Court, Thane, is directed to proceed with Application (BIR) No. 1 of 2014 on its merits and dispose of it expeditiously, preferably within six months from the date of receipt of this order. The court emphasized that the employer's conduct, particularly regarding the disputed identity of the employer and lack of clear communication of termination, made the objection hypertechnical, warranting the rejection of the appeal."
+}

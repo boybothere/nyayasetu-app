@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "directive_id": "D1",
+      "decision": "approved",
+      "rejection_reason": null,
+      "data": null,
+      "reviewer": "Adv Ram",
+      "timestamp": "2026-05-06T11:45:06.193Z"
+    },
+    {
+      "directive_id": "D2",
+      "decision": "rejected",
+      "rejection_reason": "It is not present in my case.",
+      "data": null,
+      "reviewer": "Adv Ram",
+      "timestamp": "2026-05-06T11:45:30.676Z"
+    },
+    {
+      "directive_id": "D3",
+      "decision": "approved",
+      "rejection_reason": null,
+      "data": null,
+      "reviewer": "Adv Ram",
+      "timestamp": "2026-05-06T11:45:34.632Z"
+    },
+    {
+      "directive_id": "D4",
+      "decision": "approved",
+      "rejection_reason": null,
+      "data": null,
+      "reviewer": "Adv Ram",
+      "timestamp": "2026-05-06T11:45:36.480Z"
+    }
+  ],
+  "allApproved": false
+}

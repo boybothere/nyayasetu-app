@@ -1,0 +1,49 @@
+{
+  "caseId": "64081335-b37b-480e-a72d-7dfce2a016b7",
+  "uploadedAt": "2026-05-06T11:38:46.938Z",
+  "case_number": "WRIT PETITION NO. 79 OF 2015",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "The Principal, Modern College of Arts, Science and Commerce",
+  "respondent": "Smt. Vineeta Dass",
+  "government_department_involved": "Education Department (implied through university affiliation and grant-in-aid discussions)",
+  "directives": [
+    {
+      "id": "D1",
+      "text": "Review and record the High Court's decision to quash and set aside the Industrial Court's order dated 19 November 2014.",
+      "deadline_text": "Upon receipt of the order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Update all internal records to reflect the dismissal of Complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass.",
+      "deadline_text": "Within 7 days of order receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "Notify the concerned administrative and HR departments of the judgment's outcome, emphasizing the dismissal of the unfair labour practice complaint.",
+      "deadline_text": "Within 3 days of order receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "Ensure all financial records related to the case are updated to reflect the dismissal of the claim for arrears of salary and prescribed pay scales.",
+      "deadline_text": "Within 14 days of order receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D5",
+      "text": "Archive the judgment and all related case files for future reference and compliance.",
+      "deadline_text": "Within 30 days of order receipt",
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": null,
+  "raw_summary": "The High Court of Judicature at Bombay allowed the writ petition, quashing and setting aside the Industrial Court's order dated 19 November 2014, and consequently dismissed the complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass. The court found that the respondent had failed to establish a legal right to the pay scale claimed, lacking particulars regarding comparable employees, nature of appointment, and entitlement to the Standard Code benefits. The court noted inconsistencies in the Industrial Court's findings and distinguished previous judgments based on factual differences. The petition was allowed, and the rule was made absolute, with no order as to costs."
+}

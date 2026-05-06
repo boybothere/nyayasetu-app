@@ -1,0 +1,229 @@
+{
+  "extracted": {
+    "caseId": "f308f01d-9c02-47c1-98a0-634e81d6c246",
+    "uploadedAt": "2026-05-06T11:38:34.311Z",
+    "case_number": "WRIT PETITION NO. 79 OF 2015",
+    "date_of_order": "2026-04-30",
+    "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+    "petitioner": "The Principal, Modern College of Arts, Science and Commerce",
+    "respondent": "Smt. Vineeta Dass",
+    "government_department_involved": "Education Department, State Government",
+    "directives": [
+      {
+        "id": "D1",
+        "text": "Review the Industrial Court's order dated 19 November 2014 and the High Court's judgment dated 30 April 2026.",
+        "deadline_text": "Upon receipt of order",
+        "involves_payment": false,
+        "payment_amount": null
+      },
+      {
+        "id": "D2",
+        "text": "Record the dismissal of Complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass as per the High Court's order.",
+        "deadline_text": "Upon receipt of order",
+        "involves_payment": false,
+        "payment_amount": null
+      },
+      {
+        "id": "D3",
+        "text": "Update all relevant employee records to reflect the final status of the case as per the High Court's judgment.",
+        "deadline_text": "Within 15 days of order",
+        "involves_payment": false,
+        "payment_amount": null
+      },
+      {
+        "id": "D4",
+        "text": "Archive case files related to Writ Petition No. 79 of 2015 and Complaint (ULP) No. 202 of 2009.",
+        "deadline_text": "Within 30 days of order",
+        "involves_payment": false,
+        "payment_amount": null
+      }
+    ],
+    "limitation_period_days": null,
+    "raw_summary": "The High Court of Judicature at Bombay quashed and set aside the Industrial Court's order dated 19 November 2014, dismissing the complaint filed by Smt. Vineeta Dass. The court found that the respondent failed to establish a legal right to the pay scale claimed and that her case lacked particulars required for a claim of unfair labour practice. The High Court also noted inconsistencies in the Industrial Court's findings regarding the respondent's entitlement to appointment or promotion."
+  },
+  "legal": {
+    "agent": "Legal Analyst",
+    "timestamp": "2026-05-06T11:38:54.158Z",
+    "output": {
+      "annotated_directives": [
+        {
+          "directive_id": "D1",
+          "original_text": "Review the Industrial Court's order dated 19 November 2014 and the High Court's judgment dated 30 April 2026.",
+          "source_quote": "Review the Industrial Court's order dated 19 November 2014 and the High Court's judgment dated 30 April 2026.",
+          "legal_significance": "This directive mandates a comprehensive examination of two key legal decisions: the initial order by the Industrial Court and the subsequent judgment by the High Court. It ensures that all parties understand the basis on which the High Court reached its conclusion, potentially for future appeals or compliance.",
+          "ambiguity_flag": false,
+          "confidence_score": 0.95,
+          "plain_language": "You need to carefully look at the decision made by the Industrial Court on November 19, 2014, and the High Court's decision on April 30, 2026.",
+          "hindi_summary": "औद्योगिक न्यायालय के 19 नवंबर 2014 के आदेश और उच्च न्यायालय के 30 अप्रैल 2026 के निर्णय की समीक्षा करें।"
+        },
+        {
+          "directive_id": "D2",
+          "original_text": "Record the dismissal of Complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass as per the High Court's order.",
+          "source_quote": "Record the dismissal of Complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass as per the High Court's order.",
+          "legal_significance": "This directive requires formal acknowledgment and documentation of the dismissal of a specific complaint (ULP No. 202 of 2009). This is crucial for establishing a clear legal record and preventing future litigation on the same matter, adhering to the principle of res judicata.",
+          "ambiguity_flag": false,
+          "confidence_score": 0.96,
+          "plain_language": "Formally note down that Smt. Vineeta Dass's complaint (ULP No. 202 of 2009) has been rejected, following the High Court's decision.",
+          "hindi_summary": "उच्च न्यायालय के आदेश के अनुसार श्रीमती विनीता दास द्वारा दायर शिकायत (ULP) संख्या 202/2009 की बर्खास्तगी दर्ज करें।"
+        },
+        {
+          "directive_id": "D3",
+          "original_text": "Update all relevant employee records to reflect the final status of the case as per the High Court's judgment.",
+          "source_quote": "Update all relevant employee records to reflect the final status of the case as per the High Court's judgment.",
+          "legal_significance": "This is an operational directive aimed at ensuring internal consistency and compliance. Updating records maintains an accurate historical and current status of employee matters, reflecting the legal outcome and preventing potential future disputes arising from outdated information.",
+          "ambiguity_flag": false,
+          "confidence_score": 0.94,
+          "plain_language": "Make sure all employee files show the final outcome of this case, as decided by the High Court.",
+          "hindi_summary": "उच्च न्यायालय के निर्णय के अनुसार मामले की अंतिम स्थिति को दर्शाने के लिए सभी प्रासंगिक कर्मचारी रिकॉर्ड अपडेट करें।"
+        },
+        {
+          "directive_id": "D4",
+          "original_text": "Archive case files related to Writ Petition No. 79 of 2015 and Complaint (ULP) No. 202 of 2009.",
+          "source_quote": "Archive case files related to Writ Petition No. 79 of 2015 and Complaint (ULP) No. 202 of 2009.",
+          "legal_significance": "This directive pertains to the proper management of legal documentation. Archiving ensures that records are preserved for potential future reference, audit, or legal requirements, while also clearing active case management systems.",
+          "ambiguity_flag": false,
+          "confidence_score": 0.93,
+          "plain_language": "Store the documents for Writ Petition No. 79 of 2015 and Complaint (ULP) No. 202 of 2009 in the archive.",
+          "hindi_summary": "लिखित याचिका संख्या 79/2015 और शिकायत (ULP) संख्या 202/2009 से संबंधित मामले की फाइलों को संग्रहित करें।"
+        }
+      ],
+      "overall_judgment_type": "compliance_order",
+      "analyst_notes": "The judgment primarily deals with the dismissal of a complaint of unfair labour practice. The directives focus on acknowledging this dismissal, updating records, and archiving case files, indicating a final resolution of the matter by the High Court."
+    }
+  },
+  "compliance": {
+    "agent": "Compliance Planner",
+    "timestamp": "2026-05-06T11:39:01.797Z",
+    "output": {
+      "compliance_items": [
+        {
+          "directive_id": "D1",
+          "action_type": "comply",
+          "comply_deadline": null,
+          "appeal_deadline": null,
+          "urgency": "low",
+          "urgency_reasoning": "This directive is for reviewing past orders and judgments and does not have an explicit deadline or penalty mentioned.",
+          "penalty_for_non_compliance": "None explicitly stated",
+          "recommended_action": "Review the Industrial Court's order dated 19 November 2014 and the High Court's judgment dated 30 April 2026 to understand the case history and the basis of the final decision."
+        },
+        {
+          "directive_id": "D2",
+          "action_type": "comply",
+          "comply_deadline": "2026-05-20",
+          "appeal_deadline": null,
+          "urgency": "critical",
+          "urgency_reasoning": "This directive requires recording the dismissal of a complaint, which should be done promptly to reflect the court's order accurately, and the current date is within 14 days of the judgment.",
+          "penalty_for_non_compliance": "None explicitly stated",
+          "recommended_action": "Formally record the dismissal of Complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass as per the High Court's order by May 20, 2026."
+        },
+        {
+          "directive_id": "D3",
+          "action_type": "comply",
+          "comply_deadline": "2026-06-05",
+          "appeal_deadline": null,
+          "urgency": "high",
+          "urgency_reasoning": "This directive involves updating employee records, which is time-sensitive to prevent potential future disputes, and the deadline is within 30 days of the judgment.",
+          "penalty_for_non_compliance": "None explicitly stated",
+          "recommended_action": "Update all relevant employee records to reflect the final status of the case as per the High Court's judgment by June 5, 2026."
+        },
+        {
+          "directive_id": "D4",
+          "action_type": "comply",
+          "comply_deadline": "2026-07-05",
+          "appeal_deadline": null,
+          "urgency": "medium",
+          "urgency_reasoning": "This directive involves archiving case files, which is an important but less immediately critical task compared to recording dismissals or updating records, and the deadline is within 60 days of the judgment.",
+          "penalty_for_non_compliance": "None explicitly stated",
+          "recommended_action": "Archive case files related to Writ Petition No. 79 of 2015 and Complaint (ULP) No. 202 of 2009 by July 5, 2026."
+        }
+      ],
+      "summary": "The directives require reviewing past orders, recording the dismissal of a specific complaint, updating employee records, and archiving case files. Compliance is generally straightforward, with the most urgent action being the formal recording of the complaint dismissal."
+    }
+  },
+  "implementation": {
+    "agent": "Implementation Officer",
+    "timestamp": "2026-05-06T11:39:06.250Z",
+    "output": {
+      "implementation_items": [
+        {
+          "directive_id": "D1",
+          "responsible_department": "Labour Department",
+          "responsible_officer_designation": "Secretary, Labour Department",
+          "steps": [
+            "Step 1: Obtain a copy of the Industrial Court's order dated 19 November 2014.",
+            "Step 2: Obtain a copy of the High Court's judgment dated 30 April 2026.",
+            "Step 3: Review both documents to understand the case history and the basis of the final decision.",
+            "Step 4: Prepare a summary report of the review findings."
+          ],
+          "documents_required": [
+            "Industrial Court order dated 19 November 2014",
+            "High Court judgment dated 30 April 2026",
+            "Summary report of review findings"
+          ],
+          "inter_department_dependencies": []
+        },
+        {
+          "directive_id": "D2",
+          "responsible_department": "Labour Department",
+          "responsible_officer_designation": "Registrar, Labour Court",
+          "steps": [
+            "Step 1: Obtain the High Court's order.",
+            "Step 2: Initiate the process for formally recording the dismissal of Complaint (ULP) No. 202 of 2009.",
+            "Step 3: Update the court's register and records to reflect the dismissal.",
+            "Step 4: Issue a formal notification of the dismissal if required."
+          ],
+          "documents_required": [
+            "High Court's order",
+            "Court register",
+            "Complaint (ULP) No. 202 of 2009 file",
+            "Notification of dismissal (if applicable)"
+          ],
+          "inter_department_dependencies": []
+        },
+        {
+          "directive_id": "D3",
+          "responsible_department": "Human Resources Department",
+          "responsible_officer_designation": "Head of HR",
+          "steps": [
+            "Step 1: Obtain a copy of the High Court's judgment.",
+            "Step 2: Identify all employee records related to the case mentioned in the judgment.",
+            "Step 3: Update these records to accurately reflect the final status of the case as per the court's order.",
+            "Step 4: Ensure all data entry is accurate and cross-verified.",
+            "Step 5: Obtain necessary approvals for record updates."
+          ],
+          "documents_required": [
+            "High Court's judgment",
+            "Employee record database access",
+            "Updated employee records",
+            "Approval documentation"
+          ],
+          "inter_department_dependencies": [
+            "Labour Department"
+          ]
+        },
+        {
+          "directive_id": "D4",
+          "responsible_department": "Record Management Department",
+          "responsible_officer_designation": "Chief Archivist",
+          "steps": [
+            "Step 1: Identify all physical and digital case files related to Writ Petition No. 79 of 2015.",
+            "Step 2: Identify all physical and digital case files related to Complaint (ULP) No. 202 of 2009.",
+            "Step 3: Ensure all files are complete and in accordance with archival policies.",
+            "Step 4: Transfer the identified files to the state archives.",
+            "Step 5: Record the archival details in the central registry."
+          ],
+          "documents_required": [
+            "List of case files for Writ Petition No. 79 of 2015",
+            "List of case files for Complaint (ULP) No. 202 of 2009",
+            "Archival policy guidelines",
+            "Archival record log"
+          ],
+          "inter_department_dependencies": [
+            "Labour Department",
+            "Judicial Department"
+          ]
+        }
+      ]
+    }
+  }
+}

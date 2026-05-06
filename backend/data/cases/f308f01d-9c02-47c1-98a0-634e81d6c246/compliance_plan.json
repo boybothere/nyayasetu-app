@@ -1,0 +1,49 @@
+{
+  "agent": "Compliance Planner",
+  "timestamp": "2026-05-06T11:39:01.797Z",
+  "output": {
+    "compliance_items": [
+      {
+        "directive_id": "D1",
+        "action_type": "comply",
+        "comply_deadline": null,
+        "appeal_deadline": null,
+        "urgency": "low",
+        "urgency_reasoning": "This directive is for reviewing past orders and judgments and does not have an explicit deadline or penalty mentioned.",
+        "penalty_for_non_compliance": "None explicitly stated",
+        "recommended_action": "Review the Industrial Court's order dated 19 November 2014 and the High Court's judgment dated 30 April 2026 to understand the case history and the basis of the final decision."
+      },
+      {
+        "directive_id": "D2",
+        "action_type": "comply",
+        "comply_deadline": "2026-05-20",
+        "appeal_deadline": null,
+        "urgency": "critical",
+        "urgency_reasoning": "This directive requires recording the dismissal of a complaint, which should be done promptly to reflect the court's order accurately, and the current date is within 14 days of the judgment.",
+        "penalty_for_non_compliance": "None explicitly stated",
+        "recommended_action": "Formally record the dismissal of Complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass as per the High Court's order by May 20, 2026."
+      },
+      {
+        "directive_id": "D3",
+        "action_type": "comply",
+        "comply_deadline": "2026-06-05",
+        "appeal_deadline": null,
+        "urgency": "high",
+        "urgency_reasoning": "This directive involves updating employee records, which is time-sensitive to prevent potential future disputes, and the deadline is within 30 days of the judgment.",
+        "penalty_for_non_compliance": "None explicitly stated",
+        "recommended_action": "Update all relevant employee records to reflect the final status of the case as per the High Court's judgment by June 5, 2026."
+      },
+      {
+        "directive_id": "D4",
+        "action_type": "comply",
+        "comply_deadline": "2026-07-05",
+        "appeal_deadline": null,
+        "urgency": "medium",
+        "urgency_reasoning": "This directive involves archiving case files, which is an important but less immediately critical task compared to recording dismissals or updating records, and the deadline is within 60 days of the judgment.",
+        "penalty_for_non_compliance": "None explicitly stated",
+        "recommended_action": "Archive case files related to Writ Petition No. 79 of 2015 and Complaint (ULP) No. 202 of 2009 by July 5, 2026."
+      }
+    ],
+    "summary": "The directives require reviewing past orders, recording the dismissal of a specific complaint, updating employee records, and archiving case files. Compliance is generally straightforward, with the most urgent action being the formal recording of the complaint dismissal."
+  }
+}

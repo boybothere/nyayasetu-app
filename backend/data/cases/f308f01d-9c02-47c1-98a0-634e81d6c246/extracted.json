@@ -1,0 +1,42 @@
+{
+  "caseId": "f308f01d-9c02-47c1-98a0-634e81d6c246",
+  "uploadedAt": "2026-05-06T11:38:34.311Z",
+  "case_number": "WRIT PETITION NO. 79 OF 2015",
+  "date_of_order": "2026-04-30",
+  "court_name": "HIGH COURT OF JUDICATURE AT BOMBAY",
+  "petitioner": "The Principal, Modern College of Arts, Science and Commerce",
+  "respondent": "Smt. Vineeta Dass",
+  "government_department_involved": "Education Department, State Government",
+  "directives": [
+    {
+      "id": "D1",
+      "text": "Review the Industrial Court's order dated 19 November 2014 and the High Court's judgment dated 30 April 2026.",
+      "deadline_text": "Upon receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D2",
+      "text": "Record the dismissal of Complaint (ULP) No. 202 of 2009 filed by Smt. Vineeta Dass as per the High Court's order.",
+      "deadline_text": "Upon receipt of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D3",
+      "text": "Update all relevant employee records to reflect the final status of the case as per the High Court's judgment.",
+      "deadline_text": "Within 15 days of order",
+      "involves_payment": false,
+      "payment_amount": null
+    },
+    {
+      "id": "D4",
+      "text": "Archive case files related to Writ Petition No. 79 of 2015 and Complaint (ULP) No. 202 of 2009.",
+      "deadline_text": "Within 30 days of order",
+      "involves_payment": false,
+      "payment_amount": null
+    }
+  ],
+  "limitation_period_days": null,
+  "raw_summary": "The High Court of Judicature at Bombay quashed and set aside the Industrial Court's order dated 19 November 2014, dismissing the complaint filed by Smt. Vineeta Dass. The court found that the respondent failed to establish a legal right to the pay scale claimed and that her case lacked particulars required for a claim of unfair labour practice. The High Court also noted inconsistencies in the Industrial Court's findings regarding the respondent's entitlement to appointment or promotion."
+}

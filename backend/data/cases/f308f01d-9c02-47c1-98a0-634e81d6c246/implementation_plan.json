@@ -1,0 +1,86 @@
+{
+  "agent": "Implementation Officer",
+  "timestamp": "2026-05-06T11:39:06.250Z",
+  "output": {
+    "implementation_items": [
+      {
+        "directive_id": "D1",
+        "responsible_department": "Labour Department",
+        "responsible_officer_designation": "Secretary, Labour Department",
+        "steps": [
+          "Step 1: Obtain a copy of the Industrial Court's order dated 19 November 2014.",
+          "Step 2: Obtain a copy of the High Court's judgment dated 30 April 2026.",
+          "Step 3: Review both documents to understand the case history and the basis of the final decision.",
+          "Step 4: Prepare a summary report of the review findings."
+        ],
+        "documents_required": [
+          "Industrial Court order dated 19 November 2014",
+          "High Court judgment dated 30 April 2026",
+          "Summary report of review findings"
+        ],
+        "inter_department_dependencies": []
+      },
+      {
+        "directive_id": "D2",
+        "responsible_department": "Labour Department",
+        "responsible_officer_designation": "Registrar, Labour Court",
+        "steps": [
+          "Step 1: Obtain the High Court's order.",
+          "Step 2: Initiate the process for formally recording the dismissal of Complaint (ULP) No. 202 of 2009.",
+          "Step 3: Update the court's register and records to reflect the dismissal.",
+          "Step 4: Issue a formal notification of the dismissal if required."
+        ],
+        "documents_required": [
+          "High Court's order",
+          "Court register",
+          "Complaint (ULP) No. 202 of 2009 file",
+          "Notification of dismissal (if applicable)"
+        ],
+        "inter_department_dependencies": []
+      },
+      {
+        "directive_id": "D3",
+        "responsible_department": "Human Resources Department",
+        "responsible_officer_designation": "Head of HR",
+        "steps": [
+          "Step 1: Obtain a copy of the High Court's judgment.",
+          "Step 2: Identify all employee records related to the case mentioned in the judgment.",
+          "Step 3: Update these records to accurately reflect the final status of the case as per the court's order.",
+          "Step 4: Ensure all data entry is accurate and cross-verified.",
+          "Step 5: Obtain necessary approvals for record updates."
+        ],
+        "documents_required": [
+          "High Court's judgment",
+          "Employee record database access",
+          "Updated employee records",
+          "Approval documentation"
+        ],
+        "inter_department_dependencies": [
+          "Labour Department"
+        ]
+      },
+      {
+        "directive_id": "D4",
+        "responsible_department": "Record Management Department",
+        "responsible_officer_designation": "Chief Archivist",
+        "steps": [
+          "Step 1: Identify all physical and digital case files related to Writ Petition No. 79 of 2015.",
+          "Step 2: Identify all physical and digital case files related to Complaint (ULP) No. 202 of 2009.",
+          "Step 3: Ensure all files are complete and in accordance with archival policies.",
+          "Step 4: Transfer the identified files to the state archives.",
+          "Step 5: Record the archival details in the central registry."
+        ],
+        "documents_required": [
+          "List of case files for Writ Petition No. 79 of 2015",
+          "List of case files for Complaint (ULP) No. 202 of 2009",
+          "Archival policy guidelines",
+          "Archival record log"
+        ],
+        "inter_department_dependencies": [
+          "Labour Department",
+          "Judicial Department"
+        ]
+      }
+    ]
+  }
+}
